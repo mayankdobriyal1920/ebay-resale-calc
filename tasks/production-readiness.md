@@ -121,6 +121,7 @@ Legend: `[ ]` not done, `[x]` done.
 - [x] P0 Financial calculation tests per marketplace (eBay, Poshmark, Mercari, Depop)
 - [x] P1 Cross-platform comparison tests with clear assumptions
 - [ ] P1 Browser/device tests: Chrome/Safari/Firefox desktop, iOS Safari, Android Chrome; 320/375/768/1024/wide; keyboard-only; screen reader; reduced-motion; backdrop-filter fallback
+- [x] P1 SEO: Open Graph image, JSON-LD structured data, homepage thin-content fix (server-rendered text)
 - [x] P1 Performance: small client JS, no heavy chart libs, lazy-load (FAQ), optimize fonts/images, prevent layout shift (partial)
 
 ## K. Deployment (P0)

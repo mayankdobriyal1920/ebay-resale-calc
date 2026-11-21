@@ -100,6 +100,75 @@ export default function Home() {
         </div>
       )}
       <FAQ />
+
+      <section className="glass-card px-6 py-8 sm:px-8">
+        <h2 className="text-2xl font-bold text-green-900">How it works</h2>
+        <ol className="mt-4 max-w-3xl space-y-3 text-muted leading-relaxed">
+          <li>
+            <span className="font-semibold text-green-800">Enter your item details.</span>
+            Provide the item purchase cost, expected selling price, buyer-paid shipping, and
+            your shipping/label cost.
+          </li>
+          <li>
+            <span className="font-semibold text-green-800">Pick marketplaces.</span>
+            Select eBay, Poshmark, Mercari, and/or Depop to compare side by side.
+          </li>
+          <li>
+            <span className="font-semibold text-green-800">Review estimated profit.</span>
+            See each marketplace’s fees, net proceeds, net profit, margin, and ROI — with a
+            fee breakdown you can expand.
+          </li>
+          <li>
+            <span className="font-semibold text-green-800">List where you keep more.</span>
+            Choose the marketplace with the highest estimated net profit for your item.
+          </li>
+        </ol>
+      </section>
+
+      <section className="glass-card px-6 py-8 sm:px-8">
+        <h2 className="text-2xl font-bold text-green-900">What fees are included</h2>
+        <div className="mt-4 grid gap-3 sm:grid-cols-2 text-muted leading-relaxed">
+          <div>
+            <h3 className="font-semibold text-green-800 mb-2">eBay</h3>
+            <p className="text-sm">
+              Final value fee (13.6% up to $7,500 + 2.35% over) plus a per-order fee
+              ($0.30 / $0.40). Fee base includes item price, buyer-paid shipping, and sales tax.
+            </p>
+          </div>
+          <div>
+            <h3 className="font-semibold text-green-800 mb-2">Poshmark</h3>
+            <p className="text-sm">
+              Flat $2.95 commission for sales under $15; 20% commission for sales of $15 or
+              more. Buyer-paid shipping goes to Poshmark for the label.
+            </p>
+          </div>
+          <div>
+            <h3 className="font-semibold text-green-800 mb-2">Mercari</h3>
+            <p className="text-sm">
+              10% selling fee on item price plus buyer-paid shipping (listings created/updated
+              on or after 2025-01-06). Buyer Protection fee (3.6%) is paid by the buyer.
+            </p>
+          </div>
+          <div>
+            <h3 className="font-semibold text-green-800 mb-2">Depop</h3>
+            <p className="text-sm">
+              No Depop selling fee for US sellers. Payment processing 3.3% + $0.45 on item
+              price + shipping + tax. Optional boosted listings at 12%.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="glass-card px-6 py-8 sm:px-8">
+        <h2 className="text-2xl font-bold text-green-900">Important notes</h2>
+        <ul className="mt-4 space-y-2 text-muted leading-relaxed list-disc pl-5">
+          <li>Results are estimates, not guaranteed payouts. Actual fees vary by category, seller plan, location, shipping method, taxes, and promotions.</li>
+          <li>Marketplace policies change. Official marketplace policies always take precedence.</li>
+          <li>This tool is independent and is not affiliated with or endorsed by eBay, Poshmark, Mercari, Depop, Etsy, or Whatnot.</li>
+          <li>No financial, tax, legal, or accounting advice is provided. Verify fees in your seller account before making business decisions.</li>
+          <li>Your inputs stay in your browser. No user-entered financial values are transmitted.</li>
+        </ul>
+      </section>
     </div>
   );
 }

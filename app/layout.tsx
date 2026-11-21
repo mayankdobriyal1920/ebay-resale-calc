@@ -6,6 +6,7 @@ import SiteFooter from "@/components/SiteFooter";
 import CookieConsent from "@/components/CookieConsent";
 import AdSense from "@/components/AdSense";
 import GoogleTagManager from "@/components/GoogleTagManager";
+import StructuredData from "@/components/StructuredData";
 
 const inter = Inter({ subsets: ["latin"], display: "swap", variable: "--font-inter" });
 
@@ -24,8 +25,16 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     siteName: "Reseller Profit Calc",
+    images: [
+      {
+        url: "/logo.png",
+        width: 256,
+        height: 256,
+        alt: "Reseller Profit Calc logo",
+      },
+    ],
   },
-  twitter: { card: "summary_large_image" },
+  twitter: { card: "summary_large_image", images: ["/logo.png"] },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -36,6 +45,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SiteHeader />
         <main id="main" className="mx-auto max-w-6xl px-3 py-6 sm:px-6">{children}</main>
         <SiteFooter />
+        <StructuredData />
         <CookieConsent />
         <AdSense />
         <GoogleTagManager />
