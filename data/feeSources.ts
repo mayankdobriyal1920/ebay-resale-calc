@@ -13,8 +13,8 @@ export const FEE_SOURCES: FeeSource[] = [
     marketplaceName: "eBay",
     url: "https://www.ebay.com/help/selling/fees-credits-invoices/selling-fees?id=4822",
     country: "US",
-    lastVerifiedDate: "TBD",
-    notes: "Record exact policy article URL and verification date before launch.",
+    lastVerifiedDate: "2026-11-21",
+    notes: "Verified: most categories, non-Store. 13.6% up to $7,500 + 2.35% over; per-order $0.30/$0.40.",
   },
   {
     marketplaceId: "poshmark",

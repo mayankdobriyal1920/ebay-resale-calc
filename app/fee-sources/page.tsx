@@ -17,9 +17,34 @@ export default function FeeSourcesPage() {
               {s.url}
             </a>
             <p className="mt-2 text-xs text-muted">Country: {s.country} · Last verified: {s.lastVerifiedDate}</p>
+            {s.notes && <p className="mt-1 text-xs text-muted">{s.notes}</p>}
           </li>
         ))}
       </ul>
+
+      <div className="glass-card overflow-x-auto p-5">
+        <h2 className="text-lg font-semibold text-green-800">Fee verification log</h2>
+        <table className="mt-3 w-full min-w-[640px] text-xs">
+          <thead>
+            <tr className="border-b border-border text-left text-muted">
+              <th className="py-2 pr-3">Marketplace</th>
+              <th className="py-2 pr-3">Status</th>
+              <th className="py-2 pr-3">Last verified</th>
+              <th className="py-2">Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            {FEE_SOURCES.map((s) => (
+              <tr key={s.marketplaceId} className="border-b border-border/60">
+                <td className="py-2 pr-3 font-medium">{s.marketplaceName}</td>
+                <td className="py-2 pr-3">{s.lastVerifiedDate === "TBD" ? "Pending" : "Verified"}</td>
+                <td className="py-2 pr-3">{s.lastVerifiedDate}</td>
+                <td className="py-2">{s.notes}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

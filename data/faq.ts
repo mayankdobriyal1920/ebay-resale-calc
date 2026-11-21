@@ -19,4 +19,19 @@ export const FAQ: FaqItem[] = [
     answer:
       "Each marketplace uses a different fee base and rate. Expand the fee breakdown to see the fee name, rate, base and arithmetic for each.",
   },
+  {
+    question: "What is the fee base?",
+    answer:
+      "The amount a percentage fee applies to. For eBay (most categories) this is item price + buyer-paid shipping + sales tax.",
+  },
+  {
+    question: "Why is an estimate marked incomplete?",
+    answer:
+      "If an important fee cannot be modeled reliably, the marketplace shows 'Incomplete estimate' instead of a definitive total.",
+  },
+  {
+    question: "Is this affiliated with eBay or other marketplaces?",
+    answer:
+      "No. This is an independent tool and is not endorsed by or affiliated with any marketplace.",
+  },
 ];
