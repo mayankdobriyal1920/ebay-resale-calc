@@ -1,19 +1,33 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import dynamic from "next/dynamic";
 import CalculatorInputs from "@/components/CalculatorInputs";
 import MarketplaceSelector from "@/components/MarketplaceSelector";
 import ComparisonResults from "@/components/ComparisonResults";
 import FeeBreakdown from "@/components/FeeBreakdown";
 import Disclaimer from "@/components/Disclaimer";
-import dynamic from "next/dynamic";
-const FAQ = dynamic(() => import("@/components/FAQ"), { ssr: false });
+import Breadcrumb from "@/components/Breadcrumb";
 import { MoneyInput, MarketplaceResult } from "@/calculators/types";
 import { MARKETPLACE_ADAPTERS } from "@/data/marketplaceRules";
+import { decodeStateFromQuery, encodeStateToQuery } from "@/lib/shareState";
+
+const FAQ = dynamic(() => import("@/components/FAQ"), { ssr: false });
 
 export default function Home() {
   const [input, setInput] = useState<MoneyInput | null>(null);
+  const [initial, setInitial] = useState<MoneyInput | null>(null);
   const [selected, setSelected] = useState<string[]>(["ebay", "poshmark", "mercari", "depop"]);
+  const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const decoded = decodeStateFromQuery(window.location.search);
+    if (decoded) {
+      setInitial(decoded);
+      setInput(decoded);
+    }
+  }, []);
 
   const results: MarketplaceResult[] = input
     ? selected
@@ -22,9 +36,18 @@ export default function Home() {
         .map((a) => a!.calculate(input))
     : [];
 
+  function share() {
+    if (!input || typeof window === "undefined") return;
+    const url = `${window.location.origin}${window.location.pathname}?${encodeStateToQuery(input)}`;
+    navigator.clipboard?.writeText(url).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    });
+  }
+
   return (
     <div className="space-y-6">
-      {/* Hero */}
+      <Breadcrumb items={[{ label: "Home" }]} />
       <section className="glass-card relative overflow-hidden px-6 py-8 sm:px-10 sm:py-12">
         <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-green-400/30 blur-3xl" />
         <div className="absolute -bottom-12 -left-12 h-44 w-44 rounded-full bg-green-600/20 blur-3xl" />
@@ -48,7 +71,17 @@ export default function Home() {
       </section>
 
       <Disclaimer />
-      <CalculatorInputs onChange={setInput} />
+      <CalculatorInputs onChange={setInput} initial={initial} />
+      <div className="flex justify-end">
+        <button
+          type="button"
+          onClick={share}
+          disabled={!input}
+          className="rounded-lg border border-border bg-white/70 px-4 py-2 text-sm font-medium text-muted transition hover:bg-green-100/60 hover:text-green-800 disabled:opacity-50"
+        >
+          {copied ? "Link copied" : "Share comparison"}
+        </button>
+      </div>
       <MarketplaceSelector selected={selected} onChange={setSelected} />
       {input && <ComparisonResults results={results} />}
       {input && (

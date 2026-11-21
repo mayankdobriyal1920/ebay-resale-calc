@@ -7,12 +7,14 @@ import FeeBreakdown from "@/components/FeeBreakdown";
 import Disclaimer from "@/components/Disclaimer";
 import { MoneyInput, MarketplaceResult } from "@/calculators/types";
 import { mercariAdapter } from "@/calculators/mercari";
+import Breadcrumb from "@/components/Breadcrumb";
 
 export default function MercariFeeCalculatorPage() {
   const [input, setInput] = useState<MoneyInput | null>(null);
   const results: MarketplaceResult[] = input ? [mercariAdapter.calculate(input)] : [];
   return (
     <div className="space-y-6">
+      <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Mercari fee calculator" }]} />
       <section className="glass-card px-6 py-8 sm:px-8">
         <span className="inline-flex items-center gap-2 rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-800">
           Mercari
@@ -28,6 +30,15 @@ export default function MercariFeeCalculatorPage() {
       <CalculatorInputs onChange={setInput} />
       {input && <ComparisonResults results={results} />}
       {input && results.map((r) => <FeeBreakdown key={r.marketplaceId} result={r} />)}
+
+      <section className="glass-card px-6 py-8 sm:px-8">
+        <h2 className="text-xl font-bold text-green-900">About Mercari fees</h2>
+        <p className="mt-3 text-sm leading-relaxed text-muted">
+          Mercari charges a seller fee on the sale; buyer-paid platform charges are not
+          deducted from seller proceeds. Shipping method (who pays) and seller-paid label
+          deductions affect the estimate. Exact rates are pending verification.
+        </p>
+      </section>
     </div>
   );
 }

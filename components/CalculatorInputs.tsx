@@ -7,6 +7,7 @@ import { MoneyInput } from "@/calculators/types";
 
 export interface CalculatorInputsProps {
   onChange: (input: MoneyInput | null) => void;
+  initial?: MoneyInput | null;
 }
 
 const STORAGE_KEY = "ebay-cal:inputs";
@@ -32,14 +33,32 @@ function readStored(): typeof DEFAULTS {
   }
 }
 
-export default function CalculatorInputs({ onChange }: CalculatorInputsProps) {
+export default function CalculatorInputs({ onChange, initial }: CalculatorInputsProps) {
   const [values, setValues] = useState(DEFAULTS);
   const [hydrated, setHydrated] = useState(false);
+  const [seeded, setSeeded] = useState(false);
 
   useEffect(() => {
-    setValues(readStored());
-    setHydrated(true);
-  }, []);
+    if (initial && !seeded) {
+      setValues({
+        itemCost: (initial.itemCost / 100).toFixed(2),
+        sellingPrice: (initial.sellingPrice / 100).toFixed(2),
+        buyerShipping: (initial.buyerShipping / 100).toFixed(2),
+        sellerShipping: (initial.sellerShippingCost / 100).toFixed(2),
+        packaging: (initial.packagingCost / 100).toFixed(2),
+        other: (initial.otherCost / 100).toFixed(2),
+        promoted: (initial.promotedRateBps / 100).toFixed(2),
+      });
+      setSeeded(true);
+      setHydrated(true);
+      return;
+    }
+    if (!seeded) {
+      setValues(readStored());
+      setSeeded(true);
+      setHydrated(true);
+    }
+  }, [initial, seeded]);
 
   const setField = useCallback((key: keyof typeof DEFAULTS, val: string) => {
     setValues((prev) => ({ ...prev, [key]: val }));

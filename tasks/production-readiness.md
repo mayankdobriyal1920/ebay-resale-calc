@@ -49,14 +49,14 @@ Legend: `[ ]` not done, `[x]` done.
 - [x] P0 Disclaimer component visible
 - [x] P1 Reset action
 - [x] P1 Local storage for last-used inputs/selection (optional, must work if disabled)
-- [ ] P1 Shareable URL encoding (Phase 2)
+- [x] P1 Shareable URL encoding (Phase 2) (query params)
 - [ ] P1 Copy / print / share comparison
 
 ## D. Marketplace pages & content (P1)
 
 - [ ] P1 Each calculator page: fees included/excluded, fee bases, inputs, worked example, official source links, last-verified date, useful FAQs
 - [ ] P1 No thin/duplicate pages; genuine platform-specific content
-- [ ] P1 Breadcrumbs + consistent navigation
+- [x] P1 Breadcrumbs + consistent navigation
 
 ## E. SEO (P1)
 
