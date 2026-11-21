@@ -72,7 +72,15 @@ export default function Home() {
 
       <Disclaimer />
       <CalculatorInputs onChange={setInput} initial={initial} />
-      <div className="flex justify-end">
+      <div className="flex justify-end gap-2">
+        <button
+          type="button"
+          onClick={() => window.print()}
+          disabled={!input}
+          className="rounded-lg border border-border bg-white/70 px-4 py-2 text-sm font-medium text-muted transition hover:bg-green-100/60 hover:text-green-800 disabled:opacity-50"
+        >
+          Print
+        </button>
         <button
           type="button"
           onClick={share}

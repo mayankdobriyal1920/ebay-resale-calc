@@ -50,12 +50,12 @@ Legend: `[ ]` not done, `[x]` done.
 - [x] P1 Reset action
 - [x] P1 Local storage for last-used inputs/selection (optional, must work if disabled)
 - [x] P1 Shareable URL encoding (Phase 2) (query params)
-- [ ] P1 Copy / print / share comparison
+- [x] P1 Copy / print / share comparison (print + share link)
 
 ## D. Marketplace pages & content (P1)
 
-- [ ] P1 Each calculator page: fees included/excluded, fee bases, inputs, worked example, official source links, last-verified date, useful FAQs
-- [ ] P1 No thin/duplicate pages; genuine platform-specific content
+- [x] P1 Each calculator page: fees included/excluded, fee bases, inputs, worked example, official source links, last-verified date, useful FAQs
+- [x] P1 No thin/duplicate pages; genuine platform-specific content
 - [x] P1 Breadcrumbs + consistent navigation
 
 ## E. SEO (P1)
@@ -119,7 +119,7 @@ Legend: `[ ]` not done, `[x]` done.
 
 - [x] P0 Functional tests: component smoke + unit tests (inputs/validation/money/engine)
 - [x] P0 Financial calculation tests per marketplace (eBay, Poshmark, Mercari, Depop)
-- [ ] P1 Cross-platform comparison tests with clear assumptions
+- [x] P1 Cross-platform comparison tests with clear assumptions
 - [ ] P1 Browser/device tests: Chrome/Safari/Firefox desktop, iOS Safari, Android Chrome; 320/375/768/1024/wide; keyboard-only; screen reader; reduced-motion; backdrop-filter fallback
 - [x] P1 Performance: small client JS, no heavy chart libs, lazy-load (FAQ), optimize fonts/images, prevent layout shift (partial)
 

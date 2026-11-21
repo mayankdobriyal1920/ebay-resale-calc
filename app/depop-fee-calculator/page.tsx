@@ -32,12 +32,30 @@ export default function DepopFeeCalculatorPage() {
       {input && results.map((r) => <FeeBreakdown key={r.marketplaceId} result={r} />)}
 
       <section className="glass-card px-6 py-8 sm:px-8">
-        <h2 className="text-xl font-bold text-green-900">About Depop fees</h2>
-        <p className="mt-3 text-sm leading-relaxed text-muted">
-          Depop's US selling fee status depends on seller cohort and listing conditions, plus
-          payment processing. Optional boosted listing fees are not mandatory. Exact rates are
-          pending verification.
-        </p>
+        <h2 className="text-xl font-bold text-green-900">How Depop fees work (US)</h2>
+        <div className="mt-3 space-y-3 text-sm leading-relaxed text-muted">
+          <p>
+            US sellers pay no Depop selling fee. A payment processing fee of 3.3% + $0.45
+            applies to the item price + shipping + tax (Depop Payments via Stripe). Boosted
+            listings are opt-in at 12% of the item price (+ shipping if you don't use a
+            Depop shipping label).
+          </p>
+          <h3 className="font-semibold text-text">Worked example</h3>
+          <p>
+            Sell an item for $25.00 with $5.00 buyer-paid shipping: processing base $30.00.
+            Processing fee 3.3% + $0.45 ≈ $1.44. Net proceeds ≈ $28.56 (no selling fee).
+          </p>
+          <h3 className="font-semibold text-text">Frequently asked questions</h3>
+          <details className="group">
+            <summary className="cursor-pointer font-medium text-text">Is there a selling fee?</summary>
+            <p className="mt-1">No Depop selling fee for US/UK/AUS sellers. Only payment processing applies.</p>
+          </details>
+          <details className="group">
+            <summary className="cursor-pointer font-medium text-text">How does boosting work?</summary>
+            <p className="mt-1">Opt-in boosted listings charge 12% on the item price (+ shipping if not using a Depop label).</p>
+          </details>
+          <p className="text-xs">Source: Depop Help Center "Seller fees and charges". Last verified 2026-11-21.</p>
+        </div>
       </section>
     </div>
   );
