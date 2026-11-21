@@ -15,7 +15,7 @@ import { MarketplaceAdapter, MoneyInput, FeeLine } from "./types";
 import { buildResult } from "./shared";
 import { applyRateBps } from "./money";
 
-const SOURCE_URL = "https://www.mercari.com/us/help_center/";
+const SOURCE_URL = "https://www.mercari.com/us/help_center/article/169/";
 const SELLING_RATE_BPS = 1000; // 10.00%
 
 export const mercariAdapter: MarketplaceAdapter = {

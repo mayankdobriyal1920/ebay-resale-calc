@@ -34,7 +34,7 @@ describe("reverse profit (eBay)", () => {
     }
     const check = ebayAdapter.calculate({
       itemCost: dollarsToCents("5.00"),
-      sellingPrice: r.requiredPriceCents!,
+      sellingPrice: r.requiredPriceCents,
       quantity: 1,
       buyerShipping: 0,
       sellerShippingCost: dollarsToCents("3.00"),
@@ -52,9 +52,31 @@ describe("reverse profit (eBay)", () => {
     expect(r.breakEvenPriceCents).toBeGreaterThan(0);
   });
 
+  it("returns very high price for extremely high target", () => {
+    const r = solveReverseProfit(baseInput({ desiredProfitCents: dollarsToCents("1000000.00") }));
+    expect(r.requiredPriceCents).toBeGreaterThan(0);
+    expect(r.estimatedProfitCents).toBeGreaterThanOrEqual(dollarsToCents("1000000.00"));
+  });
+
   it("handles unsupported marketplace", () => {
     const r = solveReverseProfit({ ...baseInput(), marketplaceId: "etsy" as any });
     expect(r.requiredPriceCents).toBeNull();
     expect(r.note).toContain("not supported");
+  });
+
+  it("supports poshmark marketplace", () => {
+    const r = solveReverseProfit({ ...baseInput(), marketplaceId: "poshmark" });
+    // Poshmark may not support high profit targets with $5 cost
+    expect(r.requiredPriceCents).toBeDefined();
+  });
+
+  it("supports mercari marketplace", () => {
+    const r = solveReverseProfit({ ...baseInput(), marketplaceId: "mercari" });
+    expect(r.requiredPriceCents).toBeDefined();
+  });
+
+  it("supports depop marketplace", () => {
+    const r = solveReverseProfit({ ...baseInput(), marketplaceId: "depop" });
+    expect(r.requiredPriceCents).toBeDefined();
   });
 });

@@ -13,7 +13,7 @@ import { MarketplaceAdapter, MoneyInput, FeeLine } from "./types";
 import { buildResult } from "./shared";
 import { applyRateBps } from "./money";
 
-const SOURCE_URL = "https://support.poshmark.com/";
+const SOURCE_URL = "https://support.poshmark.com/s/article/297755057?language=en_US";
 const THRESHOLD_CENTS = 1500; // $15.00 (verify inclusivity)
 const FLAT_FEE_CENTS = 295; // $2.95
 const HIGH_RATE_BPS = 2000; // 20.00%

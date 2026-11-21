@@ -149,7 +149,23 @@ export default function CalculatorInputs({ onChange, initial }: CalculatorInputs
       <div className="grid gap-4 sm:grid-cols-2">
         <CurrencyInput label="Item purchase cost" value={values.itemCost} onChange={(v) => setField("itemCost", v)} hint="What you paid for the item." error={itemCostError} />
         <CurrencyInput label="Expected selling price" value={values.sellingPrice} onChange={(v) => setField("sellingPrice", v)} required hint="Listed sale price." error={sellingPriceError} />
-        <CurrencyInput label="Quantity" value={values.quantity} onChange={(v) => setField("quantity", v)} hint="Number of identical items sold." />
+        <label className="block">
+          <span className="mb-1.5 flex items-center gap-1 text-sm font-medium text-text">
+            Quantity
+          </span>
+          <div className="flex items-center rounded-xl border border-border bg-white/80 px-3 shadow-sm">
+            <input
+              type="text"
+              inputMode="numeric"
+              value={values.quantity}
+              onChange={(e) => setField("quantity", e.target.value.replace(/[^0-9]/g, ""))}
+              className="w-full bg-transparent px-2 py-2.5 outline-none"
+              maxLength={4}
+              placeholder="1"
+            />
+          </div>
+          <span className="mt-1 block text-xs text-muted">Number of identical items sold.</span>
+        </label>
         <CurrencyInput label="Buyer-paid shipping" value={values.buyerShipping} onChange={(v) => setField("buyerShipping", v)} hint="Shipping the buyer pays." />
         <CurrencyInput label="Your shipping / label cost" value={values.sellerShipping} onChange={(v) => setField("sellerShipping", v)} hint="Your actual label cost." />
         <CurrencyInput label="Packaging cost" value={values.packaging} onChange={(v) => setField("packaging", v)} />

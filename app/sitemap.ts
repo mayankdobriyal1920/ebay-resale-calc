@@ -13,9 +13,9 @@ const routes = [
   "/whatnot-fee-calculator",
   "/reverse-profit-calculator",
   "/about",
-  "/how-we-calculate",
+  "/methodology",
   "/fee-sources",
-  "/privacy-policy",
+  "/privacy",
   "/terms",
   "/contact",
 ];

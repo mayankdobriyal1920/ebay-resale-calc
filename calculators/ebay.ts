@@ -15,7 +15,7 @@ import { MarketplaceAdapter, MoneyInput, FeeLine } from "./types";
 import { buildResult } from "./shared";
 import { applyRateBps } from "./money";
 
-const SOURCE_URL = "https://www.ebay.com/help/selling/fees-credits-invoices/selling-fees?id=4822";
+const SOURCE_URL = "https://www.ebay.com/help/selling/fees-credits-invoices/fees-credits-invoices?id=4822";
 const THRESHOLD_CENTS = 750000; // $7,500
 const LOW_RATE_BPS = 1360; // 13.6%
 const HIGH_RATE_BPS = 235; // 2.35%

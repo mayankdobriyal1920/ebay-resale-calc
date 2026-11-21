@@ -14,7 +14,7 @@ import { MarketplaceAdapter, MoneyInput, FeeLine } from "./types";
 import { buildResult } from "./shared";
 import { applyRateBps } from "./money";
 
-const SOURCE_URL = "https://help.depop.com/hc/en-gb/sections/22399498636561-Fees-and-taxes";
+const SOURCE_URL = "https://depophelp.zendesk.com/hc/en-gb/articles/360001791127-Seller-fees-and-charges";
 const PROCESSING_RATE_BPS = 330; // 3.3%
 const PROCESSING_FIXED_CENTS = 45;
 const BOOST_RATE_BPS = 1200; // 12%

@@ -3,9 +3,9 @@ import Image from "next/image";
 
 const LINKS = [
   { href: "/about", label: "About" },
-  { href: "/how-we-calculate", label: "Methodology" },
+  { href: "/methodology", label: "Methodology" },
   { href: "/fee-sources", label: "Fee sources" },
-  { href: "/privacy-policy", label: "Privacy" },
+  { href: "/privacy", label: "Privacy" },
   { href: "/terms", label: "Terms" },
   { href: "/contact", label: "Contact" },
 ];
