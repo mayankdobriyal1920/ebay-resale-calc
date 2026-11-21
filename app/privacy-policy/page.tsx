@@ -15,8 +15,8 @@ export default function PrivacyPolicyPage() {
         <p>
           If analytics or advertising scripts (such as Google AdSense) are enabled, they may
           collect technical data (device, browser, approximate location, page views, ad
-          interactions) as described by those providers. We do not send your entered financial
-          values to analytics.
+          interactions) as described by those providers. Ad scripts load only after you accept
+          cookies. We do not send your entered financial values to analytics or ads.
         </p>
         <p>
           We do not sell personal data. Contact us with privacy questions via the Contact page.

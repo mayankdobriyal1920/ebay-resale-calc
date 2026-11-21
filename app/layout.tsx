@@ -4,6 +4,7 @@ import "./globals.css";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import CookieConsent from "@/components/CookieConsent";
+import AdSense from "@/components/AdSense";
 
 const inter = Inter({ subsets: ["latin"], display: "swap", variable: "--font-inter" });
 
@@ -16,6 +17,9 @@ export const metadata: Metadata = {
   description:
     "Estimate your profit before you list. Compare fees across eBay, Poshmark, Mercari and Depop.",
   alternates: { canonical: "/" },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+  },
   openGraph: {
     type: "website",
     siteName: "Reseller Profit Calc",
@@ -32,6 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="main" className="mx-auto max-w-6xl px-3 py-6 sm:px-6">{children}</main>
         <SiteFooter />
         <CookieConsent />
+        <AdSense />
       </body>
     </html>
   );
