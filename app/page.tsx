@@ -6,7 +6,8 @@ import MarketplaceSelector from "@/components/MarketplaceSelector";
 import ComparisonResults from "@/components/ComparisonResults";
 import FeeBreakdown from "@/components/FeeBreakdown";
 import Disclaimer from "@/components/Disclaimer";
-import FAQ from "@/components/FAQ";
+import dynamic from "next/dynamic";
+const FAQ = dynamic(() => import("@/components/FAQ"), { ssr: false });
 import { MoneyInput, MarketplaceResult } from "@/calculators/types";
 import { MARKETPLACE_ADAPTERS } from "@/data/marketplaceRules";
 

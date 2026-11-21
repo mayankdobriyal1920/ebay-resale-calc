@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
+import CookieConsent from "@/components/CookieConsent";
+
+const inter = Inter({ subsets: ["latin"], display: "swap", variable: "--font-inter" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://flipfee.online"),
@@ -21,12 +25,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className="min-h-screen">
+    <html lang="en" className={inter.variable}>
+      <body className="min-h-screen font-sans" style={{ fontFamily: "var(--font-inter), Inter, system-ui, sans-serif" }}>
         <a href="#main" className="skip-link">Skip to content</a>
         <SiteHeader />
         <main id="main" className="mx-auto max-w-6xl px-3 py-6 sm:px-6">{children}</main>
         <SiteFooter />
+        <CookieConsent />
       </body>
     </html>
   );

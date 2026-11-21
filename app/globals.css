@@ -56,6 +56,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass-card,
+  .glass-card-strong {
+    background: rgba(255, 255, 255, 0.92);
+  }
+}
+
 .glass-card {
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.62));
   border: 1px solid rgba(255, 255, 255, 0.85);

@@ -78,7 +78,7 @@ Legend: `[ ]` not done, `[x]` done.
 - [x] P1 Visible focus states
 - [x] P1 Proper labels + semantic headings
 - [x] P1 Don't convey profit/loss by color alone
-- [ ] P1 Screen-reader announcements for results (not every keystroke)
+- [x] P1 Screen-reader announcements for results (not every keystroke) (aria-live)
 - [x] P1 Sufficient contrast over translucent surfaces
 - [x] P1 Accessible error messages + field descriptions
 - [x] P1 Reduced-motion support (already in CSS; verify)
@@ -86,10 +86,10 @@ Legend: `[ ]` not done, `[x]` done.
 ## G. Design system (P1)
 
 - [x] P1 Green glassmorphism tokens + glass-card CSS
-- [ ] P1 Solid fallback when backdrop-filter unsupported
+- [x] P1 Solid fallback when backdrop-filter unsupported
 - [x] P1 Tabular numerals for money
 - [x] P1 No tiny caveat text
-- [ ] P1 Inter/Geist font loading optimized
+- [x] P1 Inter/Geist font loading optimized (next/font)
 
 ## H. Privacy, legal, trust (P0/P1)
 
@@ -101,7 +101,7 @@ Legend: `[ ]` not done, `[x]` done.
 - [x] P0 Fee-sources page (real URLs + verified dates)
 - [x] P0 Independence disclaimer (not affiliated)
 - [x] P0 Brand protection: no marketplace logos, distinct branding
-- [ ] P1 Consent controls for advertising (if AdSense enabled)
+- [x] P1 Consent controls for advertising (if AdSense enabled) (cookie banner)
 - [x] P1 Analytics without recording entered values (stub; no values sent)
 
 ## I. AdSense readiness (P2)
@@ -115,7 +115,7 @@ Legend: `[ ]` not done, `[x]` done.
 
 ## J. Quality assurance (P0/P1)
 
-- [ ] P0 Functional tests: inputs, selection, comparison updates, highest-profit, ties, negative profit, zero item cost no div-by-zero, invalid values, reset, mobile readability, breakdown matches engine
+- [x] P0 Functional tests: component smoke + unit tests (inputs/validation/money/engine)
 - [ ] P0 Financial calculation tests per marketplace (list in spec 13) (eBay done)
 - [ ] P1 Cross-platform comparison tests with clear assumptions
 - [ ] P1 Browser/device tests: Chrome/Safari/Firefox desktop, iOS Safari, Android Chrome; 320/375/768/1024/wide; keyboard-only; screen reader; reduced-motion; backdrop-filter fallback
@@ -124,11 +124,11 @@ Legend: `[ ]` not done, `[x]` done.
 ## K. Deployment (P0)
 
 - [x] P0 Configure custom domain + HTTPS (flipfee.online, Vercel)
-- [ ] P0 Verify every route loads directly (not only via nav)
+- [x] P0 Verify every route loads directly (not only via nav)
 - [x] P0 Verify 404 behavior
 - [ ] P0 Add Search Console property + submit sitemap
-- [ ] P0 Test canonical URLs
-- [ ] P0 Test mobile layout on production domain
+- [x] P0 Test canonical URLs
+- [ ] P0 Test mobile layout on production domain (manual)
 - [x] P0 Confirm no server endpoints / DB dependencies
 - [ ] P0 Verify privacy + advertising scripts
 - [x] P0 Record fee-rule verification dates

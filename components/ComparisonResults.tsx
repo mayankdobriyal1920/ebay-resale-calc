@@ -19,8 +19,11 @@ export default function ComparisonResults({ results }: ComparisonResultsProps) {
   const maxProfit = Math.max(...results.map((r) => r.netProfitCents));
   const winners = results.filter((r) => r.netProfitCents === maxProfit);
 
+  const summary = results.map((r) => `${r.marketplaceName}: ${formatCurrency(r.netProfitCents)} profit`).join("; ");
+
   return (
-    <section className="space-y-4">
+    <section className="space-y-4" aria-live="polite" aria-atomic="true">
+      <span className="sr-only">{summary}</span>
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-semibold text-green-800">Results</h2>
         <span className="text-xs text-muted">Estimated values</span>
