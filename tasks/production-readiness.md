@@ -130,7 +130,7 @@ Legend: `[ ]` not done, `[x]` done.
 - [x] P0 Test canonical URLs
 - [ ] P0 Test mobile layout on production domain (manual)
 - [x] P0 Confirm no server endpoints / DB dependencies
-- [ ] P0 Verify privacy + advertising scripts
+- [x] P0 Verify privacy + advertising scripts (AdSense gated behind consent + env)
 - [x] P0 Record fee-rule verification dates
 - [x] P0 Keep rollback-ready deployment
 - [x] P0 Replace placeholder domain in sitemap/robots (flipfee.online)
