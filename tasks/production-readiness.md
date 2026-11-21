@@ -128,9 +128,9 @@ Legend: `[ ]` not done, `[x]` done.
 - [x] P0 Configure custom domain + HTTPS (flipfee.online, Vercel)
 - [x] P0 Verify every route loads directly (not only via nav)
 - [x] P0 Verify 404 behavior
-- [ ] P0 Add Search Console property + submit sitemap
+- [x] P0 Add Search Console property + submit sitemap
 - [x] P0 Test canonical URLs
-- [ ] P0 Test mobile layout on production domain (manual)
+- [x] P0 Test mobile layout on production domain (manual)
 - [x] P0 Confirm no server endpoints / DB dependencies
 - [x] P0 Verify privacy + advertising scripts (AdSense gated behind consent + env)
 - [x] P0 Record fee-rule verification dates
