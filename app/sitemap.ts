@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { SITE_URL } from "@/lib/site";
 
 export const dynamic = "force-static";
 
@@ -18,7 +19,7 @@ const routes = [
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return routes.map((r) => ({
-    url: `https://example.com${r}`,
+    url: `${SITE_URL}${r}`,
     lastModified: new Date(),
   }));
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import CurrencyInput from "./CurrencyInput";
 import { parseNonNegativeCents, parsePositiveCents, parseBps } from "@/lib/validation";
 import { MoneyInput } from "@/calculators/types";
@@ -9,23 +9,59 @@ export interface CalculatorInputsProps {
   onChange: (input: MoneyInput | null) => void;
 }
 
+const STORAGE_KEY = "ebay-cal:inputs";
+
+const DEFAULTS = {
+  itemCost: "0",
+  sellingPrice: "25.00",
+  buyerShipping: "0",
+  sellerShipping: "0",
+  packaging: "0",
+  other: "0",
+  promoted: "0",
+};
+
+function readStored(): typeof DEFAULTS {
+  try {
+    const raw = window.localStorage.getItem(STORAGE_KEY);
+    if (!raw) return DEFAULTS;
+    const parsed = JSON.parse(raw);
+    return { ...DEFAULTS, ...parsed };
+  } catch {
+    return DEFAULTS;
+  }
+}
+
 export default function CalculatorInputs({ onChange }: CalculatorInputsProps) {
-  const [itemCost, setItemCost] = useState("0");
-  const [sellingPrice, setSellingPrice] = useState("25.00");
-  const [buyerShipping, setBuyerShipping] = useState("0");
-  const [sellerShipping, setSellerShipping] = useState("0");
-  const [packaging, setPackaging] = useState("0");
-  const [other, setOther] = useState("0");
-  const [promoted, setPromoted] = useState("0");
+  const [values, setValues] = useState(DEFAULTS);
+  const [hydrated, setHydrated] = useState(false);
 
   useEffect(() => {
-    const itemCostCents = parseNonNegativeCents(itemCost);
-    const sellingPriceCents = parsePositiveCents(sellingPrice);
-    const buyerShippingCents = parseNonNegativeCents(buyerShipping);
-    const sellerShippingCents = parseNonNegativeCents(sellerShipping);
-    const packagingCents = parseNonNegativeCents(packaging);
-    const otherCents = parseNonNegativeCents(other);
-    const promotedBps = parseBps(promoted);
+    setValues(readStored());
+    setHydrated(true);
+  }, []);
+
+  const setField = useCallback((key: keyof typeof DEFAULTS, val: string) => {
+    setValues((prev) => ({ ...prev, [key]: val }));
+  }, []);
+
+  useEffect(() => {
+    if (!hydrated) return;
+    try {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(values));
+    } catch {
+      /* ignore */
+    }
+  }, [values, hydrated]);
+
+  useEffect(() => {
+    const itemCostCents = parseNonNegativeCents(values.itemCost);
+    const sellingPriceCents = parsePositiveCents(values.sellingPrice);
+    const buyerShippingCents = parseNonNegativeCents(values.buyerShipping);
+    const sellerShippingCents = parseNonNegativeCents(values.sellerShipping);
+    const packagingCents = parseNonNegativeCents(values.packaging);
+    const otherCents = parseNonNegativeCents(values.other);
+    const promotedBps = parseBps(values.promoted);
 
     if (
       itemCostCents === null ||
@@ -50,21 +86,48 @@ export default function CalculatorInputs({ onChange }: CalculatorInputsProps) {
       promotedRateBps: promotedBps,
       salesTaxIncluded: 0,
     });
-  }, [itemCost, sellingPrice, buyerShipping, sellerShipping, packaging, other, promoted, onChange]);
+  }, [values, onChange]);
+
+  const itemCostError =
+    values.itemCost.trim() !== "" && parseNonNegativeCents(values.itemCost) === null
+      ? "Enter a valid non-negative amount"
+      : null;
+  const sellingPriceError =
+    values.sellingPrice.trim() !== "" && parsePositiveCents(values.sellingPrice) === null
+      ? "Enter a price greater than 0"
+      : null;
+
+  function reset() {
+    setValues(DEFAULTS);
+    try {
+      window.localStorage.removeItem(STORAGE_KEY);
+    } catch {
+      /* ignore */
+    }
+  }
 
   return (
     <section className="glass-card p-5 sm:p-6">
       <div className="mb-4 flex items-center justify-between">
         <h2 className="text-lg font-semibold text-green-800">Item details</h2>
-        <span className="text-xs text-muted">USD</span>
+        <div className="flex items-center gap-3">
+          <span className="text-xs text-muted">USD</span>
+          <button
+            type="button"
+            onClick={reset}
+            className="rounded-lg border border-border bg-white/70 px-3 py-1.5 text-xs font-medium text-muted transition hover:bg-green-100/60 hover:text-green-800"
+          >
+            Reset
+          </button>
+        </div>
       </div>
       <div className="grid gap-4 sm:grid-cols-2">
-        <CurrencyInput label="Item purchase cost" value={itemCost} onChange={setItemCost} hint="What you paid for the item." />
-        <CurrencyInput label="Expected selling price" value={sellingPrice} onChange={setSellingPrice} required hint="Listed sale price." />
-        <CurrencyInput label="Buyer-paid shipping" value={buyerShipping} onChange={setBuyerShipping} hint="Shipping the buyer pays." />
-        <CurrencyInput label="Your shipping / label cost" value={sellerShipping} onChange={setSellerShipping} hint="Your actual label cost." />
-        <CurrencyInput label="Packaging cost" value={packaging} onChange={setPackaging} />
-        <CurrencyInput label="Other per-order cost" value={other} onChange={setOther} />
+        <CurrencyInput label="Item purchase cost" value={values.itemCost} onChange={(v) => setField("itemCost", v)} hint="What you paid for the item." error={itemCostError} />
+        <CurrencyInput label="Expected selling price" value={values.sellingPrice} onChange={(v) => setField("sellingPrice", v)} required hint="Listed sale price." error={sellingPriceError} />
+        <CurrencyInput label="Buyer-paid shipping" value={values.buyerShipping} onChange={(v) => setField("buyerShipping", v)} hint="Shipping the buyer pays." />
+        <CurrencyInput label="Your shipping / label cost" value={values.sellerShipping} onChange={(v) => setField("sellerShipping", v)} hint="Your actual label cost." />
+        <CurrencyInput label="Packaging cost" value={values.packaging} onChange={(v) => setField("packaging", v)} />
+        <CurrencyInput label="Other per-order cost" value={values.other} onChange={(v) => setField("other", v)} />
       </div>
       <div className="mt-4">
         <label className="block">
@@ -72,8 +135,8 @@ export default function CalculatorInputs({ onChange }: CalculatorInputsProps) {
           <input
             type="text"
             inputMode="decimal"
-            value={promoted}
-            onChange={(e) => setPromoted(e.target.value)}
+            value={values.promoted}
+            onChange={(e) => setField("promoted", e.target.value)}
             className="input-field"
             placeholder="0"
           />

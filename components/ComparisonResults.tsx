@@ -70,6 +70,9 @@ export default function ComparisonResults({ results }: ComparisonResultsProps) {
           );
         })}
       </div>
+      <p className="text-xs text-muted">
+        Margin = net profit ÷ order total (item price + buyer-paid shipping + modeled tax). ROI = net profit ÷ item cost.
+      </p>
     </section>
   );
 }
