@@ -29,8 +29,8 @@ export const FEE_SOURCES: FeeSource[] = [
     marketplaceName: "Mercari",
     url: "https://www.mercari.com/us/help_center/",
     country: "US",
-    lastVerifiedDate: "TBD",
-    notes: "Record exact policy article URL and verification date before launch.",
+    lastVerifiedDate: "2026-11-21",
+    notes: "Verified: 10% selling fee on item price + buyer-paid shipping (post 2025-01-06). Buyer protection 3.6% buyer-paid.",
   },
   {
     marketplaceId: "depop",
