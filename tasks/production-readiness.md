@@ -110,6 +110,8 @@ Legend: `[ ]` not done, `[x]` done.
 - [ ] P2 Useful original platform-specific content (partial)
 - [x] P2 Clear navigation
 - [x] P2 No broken routes
+- [x] P2 ads.txt present
+- [x] P2 AdSense client configured (env)
 - [ ] P2 No excessive ads; ads not resembling controls
 - [ ] P2 Monitor Core Web Vitals after ads enabled
 
