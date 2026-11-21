@@ -35,10 +35,10 @@ export const FEE_SOURCES: FeeSource[] = [
   {
     marketplaceId: "depop",
     marketplaceName: "Depop",
-    url: "https://depophelp.zendesk.com/",
+    url: "https://help.depop.com/hc/en-gb/sections/22399498636561-Fees-and-taxes",
     country: "US",
-    lastVerifiedDate: "TBD",
-    notes: "Record exact policy article URL and verification date before launch.",
+    lastVerifiedDate: "2026-11-21",
+    notes: "Verified: no selling fee for US sellers; processing 3.3% + $0.45; boost 12% opt-in.",
   },
   {
     marketplaceId: "etsy",
