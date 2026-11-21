@@ -1,0 +1,59 @@
+export interface FeeSource {
+  marketplaceId: string;
+  marketplaceName: string;
+  url: string;
+  country: string;
+  lastVerifiedDate: string; // ISO date or "TBD"
+  notes: string;
+}
+
+export const FEE_SOURCES: FeeSource[] = [
+  {
+    marketplaceId: "ebay",
+    marketplaceName: "eBay",
+    url: "https://www.ebay.com/help/selling/fees-credits-invoices/selling-fees?id=4822",
+    country: "US",
+    lastVerifiedDate: "TBD",
+    notes: "Record exact policy article URL and verification date before launch.",
+  },
+  {
+    marketplaceId: "poshmark",
+    marketplaceName: "Poshmark",
+    url: "https://support.poshmark.com/",
+    country: "US",
+    lastVerifiedDate: "TBD",
+    notes: "Record exact policy article URL and verification date before launch.",
+  },
+  {
+    marketplaceId: "mercari",
+    marketplaceName: "Mercari",
+    url: "https://www.mercari.com/us/help_center/",
+    country: "US",
+    lastVerifiedDate: "TBD",
+    notes: "Record exact policy article URL and verification date before launch.",
+  },
+  {
+    marketplaceId: "depop",
+    marketplaceName: "Depop",
+    url: "https://depophelp.zendesk.com/",
+    country: "US",
+    lastVerifiedDate: "TBD",
+    notes: "Record exact policy article URL and verification date before launch.",
+  },
+  {
+    marketplaceId: "etsy",
+    marketplaceName: "Etsy",
+    url: "https://www.etsy.com/legal/fees/",
+    country: "US",
+    lastVerifiedDate: "TBD",
+    notes: "Phase 2.",
+  },
+  {
+    marketplaceId: "whatnot",
+    marketplaceName: "Whatnot",
+    url: "https://help.whatnot.com/",
+    country: "US",
+    lastVerifiedDate: "TBD",
+    notes: "Phase 2.",
+  },
+];

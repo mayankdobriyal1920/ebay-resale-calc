@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --green-950: #063B2B;
+  --green-800: #075E45;
+  --green-700: #087F5B;
+  --green-600: #0A9B68;
+  --green-400: #4ADE9B;
+  --green-100: #DDF8EA;
+  --surface: rgba(255, 255, 255, 0.72);
+  --surface-strong: rgba(255, 255, 255, 0.88);
+  --text: #10251D;
+  --muted: #64756D;
+  --border: rgba(8, 95, 67, 0.14);
+  --danger: #C0392B;
+  --warning: #A16207;
+}
+
+body {
+  background: radial-gradient(circle at 10% 10%, #DDF8EA 0%, #f7faf8 40%, #ffffff 100%);
+  color: var(--text);
+  font-family: Inter, system-ui, sans-serif;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.78);
+  box-shadow: 0 12px 36px rgba(5, 70, 45, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-radius: 20px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
