@@ -1,1 +1,1 @@
-import "@testing-library/jest-dom";
+// Test setup (jsdom). No jest-dom matchers to avoid peer-dep conflicts.

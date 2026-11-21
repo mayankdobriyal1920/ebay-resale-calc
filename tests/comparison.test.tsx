@@ -19,7 +19,7 @@ describe("ComparisonResults", () => {
     };
     const r = ebayAdapter.calculate(input);
     render(<ComparisonResults results={[r]} />);
-    expect(screen.getByText("eBay")).toBeInTheDocument();
-    expect(screen.getByText("Best")).toBeInTheDocument();
+    expect(screen.getByText("eBay")).toBeTruthy();
+    expect(screen.getByText("Best")).toBeTruthy();
   });
 });
