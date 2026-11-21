@@ -16,12 +16,12 @@ Legend: `[ ]` not done, `[x]` done.
 - [x] P0 Verify Mercari US fee rules; record source URL + verification date
 - [x] P0 Implement Mercari adapter: seller fee rate + fee base, shipping method/who pays, seller-paid label deductions; distinguish seller vs buyer fees
 - [x] P0 Add unit tests for Mercari
-- [ ] P0 Verify Depop US fee rules (seller cohort / listing conditions); record source URL + verification date
-- [ ] P0 Implement Depop adapter: selling fee status, payment-processing % + fixed, optional boost fee (not mandatory), shipping treatment
-- [ ] P0 Add unit tests for Depop
+- [x] P0 Verify Depop US fee rules (seller cohort / listing conditions); record source URL + verification date
+- [x] P0 Implement Depop adapter: selling fee status, payment-processing % + fixed, optional boost fee (not mandatory), shipping treatment
+- [x] P0 Add unit tests for Depop
 - [x] P0 Add fee schedule version, effective date, last-verified date, source URL to each adapter
 - [x] P0 Add "Incomplete estimate" handling when an important fee cannot be modeled
-- [ ] P0 Remove "UNVERIFIED" state only after verification is complete
+- [x] P0 Remove "UNVERIFIED" state for all MVP marketplaces (Etsy/Whatnot remain Phase 2)
 
 ## B. Calculation model & money (P0)
 
@@ -118,7 +118,7 @@ Legend: `[ ]` not done, `[x]` done.
 ## J. Quality assurance (P0/P1)
 
 - [x] P0 Functional tests: component smoke + unit tests (inputs/validation/money/engine)
-- [ ] P0 Financial calculation tests per marketplace (list in spec 13) (eBay done)
+- [x] P0 Financial calculation tests per marketplace (eBay, Poshmark, Mercari, Depop)
 - [ ] P1 Cross-platform comparison tests with clear assumptions
 - [ ] P1 Browser/device tests: Chrome/Safari/Firefox desktop, iOS Safari, Android Chrome; 320/375/768/1024/wide; keyboard-only; screen reader; reduced-motion; backdrop-filter fallback
 - [x] P1 Performance: small client JS, no heavy chart libs, lazy-load (FAQ), optimize fonts/images, prevent layout shift (partial)
