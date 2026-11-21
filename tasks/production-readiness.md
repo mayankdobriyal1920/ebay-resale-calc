@@ -10,9 +10,9 @@ Legend: `[ ]` not done, `[x]` done.
 - [x] P0 Verify eBay US seller-fee rules against official source; record exact policy URL + effective date + verification date
 - [x] P0 Implement eBay adapter: category rates, final value fee, per-order fixed fee + order-value threshold, fee base (shipping/tax treatment)
 - [x] P0 Add unit tests for eBay: zero order, min order, 1 cent below/at/above threshold, tiered, promotion on/off, buyer/seller shipping, tax included/excluded, negative profit, high-value, rounding edge
-- [ ] P0 Verify Poshmark US fee rules; record source URL + verification date
-- [ ] P0 Implement Poshmark adapter: sale-price threshold boundary (below/equal/above), fixed fee for lower-value, percentage fee for higher-value, seller-funded shipping discount
-- [ ] P0 Add unit tests for Poshmark threshold boundary
+- [x] P0 Verify Poshmark US fee rules; record source URL + verification date
+- [x] P0 Implement Poshmark adapter: sale-price threshold boundary (below/equal/above), fixed fee for lower-value, percentage fee for higher-value, seller-funded shipping discount
+- [x] P0 Add unit tests for Poshmark threshold boundary
 - [ ] P0 Verify Mercari US fee rules; record source URL + verification date
 - [ ] P0 Implement Mercari adapter: seller fee rate + fee base, shipping method/who pays, seller-paid label deductions; distinguish seller vs buyer fees
 - [ ] P0 Add unit tests for Mercari
