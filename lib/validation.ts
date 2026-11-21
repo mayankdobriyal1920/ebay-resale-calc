@@ -3,6 +3,8 @@
 export function parseNonNegativeCents(raw: string): number | null {
   const trimmed = raw.trim();
   if (trimmed === "") return null;
+  // Reject non-numeric, Infinity, NaN, and values with more than 2 decimals
+  if (!/^\d+(\.\d{1,2})?$/.test(trimmed)) return null;
   const n = Number(trimmed);
   if (!Number.isFinite(n) || n < 0) return null;
   // convert to cents with rounding to avoid float drift

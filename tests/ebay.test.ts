@@ -67,4 +67,12 @@ describe("eBay adapter", () => {
     const r = ebayAdapter.calculate(input());
     expect(r.isComplete).toBe(true);
   });
+
+  it("scales fees with quantity", () => {
+    const single = ebayAdapter.calculate(input({ sellingPrice: dollarsToCents("25.00") }));
+    const double = ebayAdapter.calculate(input({ sellingPrice: dollarsToCents("25.00"), quantity: 2 }));
+    // Final value fee on $50 should be more than on $25 (tiered)
+    expect(double.totalFeesCents).toBeGreaterThan(single.totalFeesCents);
+    expect(double.modeledRevenueCents).toBe(dollarsToCents("50.00"));
+  });
 });

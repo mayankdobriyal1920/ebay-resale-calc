@@ -1,12 +1,14 @@
+import { SITE_URL } from "@/lib/site";
+
 export default function StructuredData() {
   const website = {
     "@context": "https://schema.org",
     "@type": "WebSite",
     name: "Reseller Profit Calc",
-    url: "https://flipfee.online",
+    url: SITE_URL,
     potentialAction: {
       "@type": "SearchAction",
-      target: "https://flipfee.online/",
+      target: `${SITE_URL}/`,
       "query-input": "required",
     },
   };
@@ -15,8 +17,8 @@ export default function StructuredData() {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "Reseller Profit Calc",
-    url: "https://flipfee.online",
-    logo: "https://flipfee.online/logo.png",
+    url: SITE_URL,
+    logo: `${SITE_URL}/logo.png`,
   };
 
   return (

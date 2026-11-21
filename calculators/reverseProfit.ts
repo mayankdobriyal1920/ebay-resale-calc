@@ -1,4 +1,7 @@
 import { ebayAdapter } from "./ebay";
+import { poshmarkAdapter } from "./poshmark";
+import { mercariAdapter } from "./mercari";
+import { depopAdapter } from "./depop";
 import { MarketplaceAdapter } from "./types";
 
 export interface ReverseProfitInput {
@@ -16,6 +19,7 @@ export interface ReverseProfitInput {
 
 export interface ReverseProfitResult {
   requiredPriceCents: number | null;
+  breakEvenPriceCents: number | null;
   estimatedFeesCents: number | null;
   estimatedNetProceedsCents: number | null;
   estimatedProfitCents: number | null;
@@ -24,6 +28,9 @@ export interface ReverseProfitResult {
 
 const ADAPTERS: Record<string, MarketplaceAdapter> = {
   ebay: ebayAdapter,
+  poshmark: poshmarkAdapter,
+  mercari: mercariAdapter,
+  depop: depopAdapter,
 };
 
 export function solveReverseProfit(input: ReverseProfitInput): ReverseProfitResult {
@@ -31,6 +38,7 @@ export function solveReverseProfit(input: ReverseProfitInput): ReverseProfitResu
   if (!adapter) {
     return {
       requiredPriceCents: null,
+      breakEvenPriceCents: null,
       estimatedFeesCents: null,
       estimatedNetProceedsCents: null,
       estimatedProfitCents: null,
@@ -55,6 +63,29 @@ export function solveReverseProfit(input: ReverseProfitInput): ReverseProfitResu
     return r.netProfitCents;
   }
 
+  // Find break-even price (profit = 0) using binary search.
+  let breakEvenPriceCents: number | null = null;
+  {
+    let lo = 0;
+    let hi = Math.max(100, input.itemCostCents + input.sellerShippingCostCents + input.packagingCostCents + input.otherCostCents + 100000);
+    let guard = 0;
+    while (profitAt(hi) < 0 && guard < 60) {
+      hi *= 2;
+      guard++;
+    }
+    if (profitAt(hi) >= 0) {
+      while (lo < hi) {
+        const mid = Math.floor((lo + hi) / 2);
+        if (profitAt(mid) >= 0) {
+          hi = mid;
+        } else {
+          lo = mid + 1;
+        }
+      }
+      breakEvenPriceCents = profitAt(lo) >= 0 ? lo : null;
+    }
+  }
+
   // Binary search: profit increases with price (monotonic for our fee models).
   let lo = 0;
   let hi = Math.max(100, input.desiredProfitCents + input.itemCostCents + input.sellerShippingCostCents + input.packagingCostCents + input.otherCostCents + 100000);
@@ -67,6 +98,7 @@ export function solveReverseProfit(input: ReverseProfitInput): ReverseProfitResu
   if (profitAt(hi) < input.desiredProfitCents) {
     return {
       requiredPriceCents: null,
+      breakEvenPriceCents,
       estimatedFeesCents: null,
       estimatedNetProceedsCents: null,
       estimatedProfitCents: null,
@@ -98,10 +130,11 @@ export function solveReverseProfit(input: ReverseProfitInput): ReverseProfitResu
 
   return {
     requiredPriceCents: lo,
+    breakEvenPriceCents,
     estimatedFeesCents: final.totalFeesCents,
     estimatedNetProceedsCents: final.netProceedsCents,
     estimatedProfitCents: final.netProfitCents,
-    note: "Estimated minimum selling price to reach the desired profit (eBay, most categories).",
+    note: "Estimated minimum selling price to reach the desired profit.",
   };
 }
 
