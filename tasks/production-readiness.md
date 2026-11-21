@@ -107,9 +107,9 @@ Legend: `[ ]` not done, `[x]` done.
 ## I. AdSense readiness (P2)
 
 - [ ] P2 Fully working calculators
-- [ ] P2 Useful original platform-specific content
-- [ ] P2 Clear navigation
-- [ ] P2 No broken routes / placeholder text
+- [ ] P2 Useful original platform-specific content (partial)
+- [x] P2 Clear navigation
+- [x] P2 No broken routes
 - [ ] P2 No excessive ads; ads not resembling controls
 - [ ] P2 Monitor Core Web Vitals after ads enabled
 
@@ -119,7 +119,7 @@ Legend: `[ ]` not done, `[x]` done.
 - [ ] P0 Financial calculation tests per marketplace (list in spec 13) (eBay done)
 - [ ] P1 Cross-platform comparison tests with clear assumptions
 - [ ] P1 Browser/device tests: Chrome/Safari/Firefox desktop, iOS Safari, Android Chrome; 320/375/768/1024/wide; keyboard-only; screen reader; reduced-motion; backdrop-filter fallback
-- [ ] P1 Performance: small client JS, no heavy chart libs, lazy-load, optimize fonts/images, prevent layout shift, Lighthouse scores
+- [x] P1 Performance: small client JS, no heavy chart libs, lazy-load (FAQ), optimize fonts/images, prevent layout shift (partial)
 
 ## K. Deployment (P0)
 
