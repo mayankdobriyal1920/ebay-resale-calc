@@ -13,9 +13,9 @@ Legend: `[ ]` not done, `[x]` done.
 - [x] P0 Verify Poshmark US fee rules; record source URL + verification date
 - [x] P0 Implement Poshmark adapter: sale-price threshold boundary (below/equal/above), fixed fee for lower-value, percentage fee for higher-value, seller-funded shipping discount
 - [x] P0 Add unit tests for Poshmark threshold boundary
-- [ ] P0 Verify Mercari US fee rules; record source URL + verification date
-- [ ] P0 Implement Mercari adapter: seller fee rate + fee base, shipping method/who pays, seller-paid label deductions; distinguish seller vs buyer fees
-- [ ] P0 Add unit tests for Mercari
+- [x] P0 Verify Mercari US fee rules; record source URL + verification date
+- [x] P0 Implement Mercari adapter: seller fee rate + fee base, shipping method/who pays, seller-paid label deductions; distinguish seller vs buyer fees
+- [x] P0 Add unit tests for Mercari
 - [ ] P0 Verify Depop US fee rules (seller cohort / listing conditions); record source URL + verification date
 - [ ] P0 Implement Depop adapter: selling fee status, payment-processing % + fixed, optional boost fee (not mandatory), shipping treatment
 - [ ] P0 Add unit tests for Depop
