@@ -1,4 +1,8 @@
 {
+  "env": {
+    "NEXT_PUBLIC_SITE_URL": "https://flipfee.online",
+    "NEXT_PUBLIC_ADSENSE_CLIENT": "ca-pub-3366036914417048"
+  },
   "buildCommand": "npm run build",
   "devCommand": "npm run dev",
   "installCommand": "npm install",
