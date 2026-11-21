@@ -21,8 +21,8 @@ export const FEE_SOURCES: FeeSource[] = [
     marketplaceName: "Poshmark",
     url: "https://support.poshmark.com/",
     country: "US",
-    lastVerifiedDate: "TBD",
-    notes: "Record exact policy article URL and verification date before launch.",
+    lastVerifiedDate: "2026-11-21",
+    notes: "Verified: under $15 flat $2.95; $15+ 20% commission. Exact article URL to be recorded.",
   },
   {
     marketplaceId: "mercari",
