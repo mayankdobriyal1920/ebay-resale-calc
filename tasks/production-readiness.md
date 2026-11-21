@@ -69,7 +69,7 @@ Legend: `[ ]` not done, `[x]` done.
 - [x] P1 Descriptive internal links
 - [x] P1 404 page
 - [x] P1 Fast loading, stable layout (CLS)
-- [ ] P1 Replace `example.com` placeholder in sitemap/robots with real domain
+- [x] P1 Replace `example.com` placeholder in sitemap/robots with real domain (flipfee.online)
 
 ## F. Accessibility (P1)
 
@@ -123,7 +123,7 @@ Legend: `[ ]` not done, `[x]` done.
 
 ## K. Deployment (P0)
 
-- [ ] P0 Configure custom domain + HTTPS
+- [x] P0 Configure custom domain + HTTPS (flipfee.online, Vercel)
 - [ ] P0 Verify every route loads directly (not only via nav)
 - [x] P0 Verify 404 behavior
 - [ ] P0 Add Search Console property + submit sitemap
@@ -133,7 +133,7 @@ Legend: `[ ]` not done, `[x]` done.
 - [ ] P0 Verify privacy + advertising scripts
 - [x] P0 Record fee-rule verification dates
 - [x] P0 Keep rollback-ready deployment
-- [ ] P0 Replace placeholder domain in sitemap/robots
+- [x] P0 Replace placeholder domain in sitemap/robots (flipfee.online)
 
 ## L. Phase 2 (P2)
 
