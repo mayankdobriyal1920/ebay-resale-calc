@@ -9,6 +9,13 @@ const LABELS: Record<string, string> = {
   depop: "Depop",
 };
 
+const ICONS: Record<string, string> = {
+  ebay: "🛒",
+  poshmark: "👗",
+  mercari: "📦",
+  depop: "✨",
+};
+
 export interface MarketplaceSelectorProps {
   selected: string[];
   onChange: (ids: string[]) => void;
@@ -16,30 +23,30 @@ export interface MarketplaceSelectorProps {
 
 export default function MarketplaceSelector({ selected, onChange }: MarketplaceSelectorProps) {
   function toggle(id: string) {
-    if (selected.includes(id)) {
-      onChange(selected.filter((x) => x !== id));
-    } else {
-      onChange([...selected, id]);
-    }
+    if (selected.includes(id)) onChange(selected.filter((x) => x !== id));
+    else onChange([...selected, id]);
   }
   return (
-    <section className="glass-card p-4">
-      <h2 className="mb-3 text-lg font-semibold text-green-800">Marketplaces</h2>
-      <div className="flex flex-wrap gap-2">
-        {MVP_MARKETPLACE_IDS.map((id) => (
-          <button
-            key={id}
-            type="button"
-            onClick={() => toggle(id)}
-            className={`rounded-full px-4 py-2 text-sm ${
-              selected.includes(id)
-                ? "bg-green-600 text-white"
-                : "bg-surface-strong text-muted"
-            }`}
-          >
-            {LABELS[id]}
-          </button>
-        ))}
+    <section className="glass-card p-5 sm:p-6">
+      <div className="mb-4 flex items-center justify-between">
+        <h2 className="text-lg font-semibold text-green-800">Compare marketplaces</h2>
+        <span className="text-xs text-muted">{selected.length} selected</span>
+      </div>
+      <div className="flex flex-wrap gap-2.5">
+        {MVP_MARKETPLACE_IDS.map((id) => {
+          const active = selected.includes(id);
+          return (
+            <button
+              key={id}
+              type="button"
+              onClick={() => toggle(id)}
+              aria-pressed={active}
+              className={`chip ${active ? "chip-active" : ""}`}
+            >
+              <span aria-hidden>{ICONS[id]}</span> {LABELS[id]}
+            </button>
+          );
+        })}
       </div>
     </section>
   );

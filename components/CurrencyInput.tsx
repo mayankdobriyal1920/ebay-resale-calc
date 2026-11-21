@@ -9,28 +9,25 @@ export interface CurrencyInputProps {
   error?: string | null;
 }
 
-export default function CurrencyInput({
-  label,
-  value,
-  onChange,
-  hint,
-  required,
-  error,
-}: CurrencyInputProps) {
+export default function CurrencyInput({ label, value, onChange, hint, required, error }: CurrencyInputProps) {
   return (
     <label className="block">
-      <span className="mb-1 block text-sm font-medium text-text">
+      <span className="mb-1.5 flex items-center gap-1 text-sm font-medium text-text">
         {label}
-        {required ? " *" : ""}
+        {required && <span className="text-green-600">*</span>}
       </span>
-      <div className="flex items-center rounded-lg border border-border bg-surface-strong px-3">
-        <span className="text-muted">$</span>
+      <div
+        className={`flex items-center rounded-xl border bg-white/80 px-3 shadow-sm transition ${
+          error ? "border-danger" : "border-border focus-within:border-green-600 focus-within:ring-2 focus-within:ring-green-600/20"
+        }`}
+      >
+        <span className="select-none text-muted">$</span>
         <input
           type="text"
           inputMode="decimal"
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="w-full bg-transparent px-2 py-2 outline-none"
+          className="w-full bg-transparent px-2 py-2.5 outline-none placeholder:text-muted/60"
           aria-invalid={!!error}
         />
       </div>

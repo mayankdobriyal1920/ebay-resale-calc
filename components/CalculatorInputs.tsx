@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import CurrencyInput from "./CurrencyInput";
 import { parseNonNegativeCents, parsePositiveCents, parseBps } from "@/lib/validation";
 import { MoneyInput } from "@/calculators/types";
@@ -18,7 +18,7 @@ export default function CalculatorInputs({ onChange }: CalculatorInputsProps) {
   const [other, setOther] = useState("0");
   const [promoted, setPromoted] = useState("0");
 
-  function emit() {
+  useEffect(() => {
     const itemCostCents = parseNonNegativeCents(itemCost);
     const sellingPriceCents = parsePositiveCents(sellingPrice);
     const buyerShippingCents = parseNonNegativeCents(buyerShipping);
@@ -50,36 +50,36 @@ export default function CalculatorInputs({ onChange }: CalculatorInputsProps) {
       promotedRateBps: promotedBps,
       salesTaxIncluded: 0,
     });
-  }
-
-  // emit on every render-ish via effect-less manual: call emit in onChange handlers instead
-  // We'll use a buttonless approach: recompute when fields change.
-  React.useEffect(() => {
-    emit();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [itemCost, sellingPrice, buyerShipping, sellerShipping, packaging, other, promoted]);
+  }, [itemCost, sellingPrice, buyerShipping, sellerShipping, packaging, other, promoted, onChange]);
 
   return (
-    <section className="glass-card p-4">
-      <h2 className="mb-3 text-lg font-semibold text-green-800">Inputs</h2>
-      <div className="grid gap-3 sm:grid-cols-2">
-        <CurrencyInput label="Item purchase cost" value={itemCost} onChange={setItemCost} />
-        <CurrencyInput label="Expected selling price" value={sellingPrice} onChange={setSellingPrice} required />
+    <section className="glass-card p-5 sm:p-6">
+      <div className="mb-4 flex items-center justify-between">
+        <h2 className="text-lg font-semibold text-green-800">Item details</h2>
+        <span className="text-xs text-muted">USD</span>
+      </div>
+      <div className="grid gap-4 sm:grid-cols-2">
+        <CurrencyInput label="Item purchase cost" value={itemCost} onChange={setItemCost} hint="What you paid for the item." />
+        <CurrencyInput label="Expected selling price" value={sellingPrice} onChange={setSellingPrice} required hint="Listed sale price." />
         <CurrencyInput label="Buyer-paid shipping" value={buyerShipping} onChange={setBuyerShipping} hint="Shipping the buyer pays." />
         <CurrencyInput label="Your shipping / label cost" value={sellerShipping} onChange={setSellerShipping} hint="Your actual label cost." />
         <CurrencyInput label="Packaging cost" value={packaging} onChange={setPackaging} />
         <CurrencyInput label="Other per-order cost" value={other} onChange={setOther} />
       </div>
-      <label className="mt-3 block">
-        <span className="mb-1 block text-sm font-medium text-text">Promoted / boosted listing rate (%)</span>
-        <input
-          type="text"
-          inputMode="decimal"
-          value={promoted}
-          onChange={(e) => setPromoted(e.target.value)}
-          className="w-full rounded-lg border border-border bg-surface-strong px-3 py-2"
-        />
-      </label>
+      <div className="mt-4">
+        <label className="block">
+          <span className="mb-1.5 block text-sm font-medium text-text">Promoted / boosted listing rate (%)</span>
+          <input
+            type="text"
+            inputMode="decimal"
+            value={promoted}
+            onChange={(e) => setPromoted(e.target.value)}
+            className="input-field"
+            placeholder="0"
+          />
+          <span className="mt-1 block text-xs text-muted">Optional platform promotion rate.</span>
+        </label>
+      </div>
     </section>
   );
 }

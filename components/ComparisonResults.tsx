@@ -9,48 +9,76 @@ export interface ComparisonResultsProps {
 
 export default function ComparisonResults({ results }: ComparisonResultsProps) {
   if (results.length === 0) {
-    return <p className="text-muted">Select at least one marketplace.</p>;
+    return (
+      <div className="glass-card p-6 text-center text-muted">
+        Select at least one marketplace to compare.
+      </div>
+    );
   }
 
-  // highest profit (tie handling: show tie if equal after rounding to cents)
   const maxProfit = Math.max(...results.map((r) => r.netProfitCents));
   const winners = results.filter((r) => r.netProfitCents === maxProfit);
 
   return (
-    <section className="glass-card p-4">
-      <h2 className="mb-3 text-lg font-semibold text-green-800">Comparison</h2>
-      <div className="space-y-3">
+    <section className="space-y-4">
+      <div className="flex items-center justify-between">
+        <h2 className="text-lg font-semibold text-green-800">Results</h2>
+        <span className="text-xs text-muted">Estimated values</span>
+      </div>
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {results.map((r) => {
           const isWinner = winners.length === 1 && r.netProfitCents === maxProfit;
           const isTie = winners.length > 1 && r.netProfitCents === maxProfit;
           return (
-            <article key={r.marketplaceId} className="rounded-lg border border-border bg-surface-strong p-3">
-              <div className="flex items-center justify-between">
-                <span className="font-semibold text-text">{r.marketplaceName}</span>
-                {isWinner && (
-                  <span className="text-xs font-medium text-green-700">Highest estimated profit</span>
-                )}
-                {isTie && <span className="text-xs font-medium text-green-700">Tie</span>}
+            <article
+              key={r.marketplaceId}
+              className={`relative overflow-hidden rounded-2xl border bg-white/80 p-5 shadow-sm backdrop-blur transition ${
+                isWinner
+                  ? "border-green-500/60 ring-2 ring-green-500/30"
+                  : "border-border"
+              }`}
+            >
+              {isWinner && (
+                <span className="absolute right-3 top-3 rounded-full bg-gradient-to-r from-green-600 to-green-500 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-white shadow">
+                  Best
+                </span>
+              )}
+              {isTie && (
+                <span className="absolute right-3 top-3 rounded-full bg-green-100 px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide text-green-800">
+                  Tie
+                </span>
+              )}
+              <h3 className="text-base font-semibold text-green-800">{r.marketplaceName}</h3>
+              <div className="mt-3">
+                <p className="text-xs uppercase tracking-wide text-muted">Net profit</p>
+                <p className="mt-0.5 text-3xl font-bold tabular-nums text-text">
+                  {formatCurrency(r.netProfitCents)}
+                </p>
               </div>
-              <dl className="mt-2 grid grid-cols-2 gap-1 text-sm">
-                <dt className="text-muted">Total fees</dt>
-                <dd className="text-right tabular-nums">{formatCurrency(r.totalFeesCents)}</dd>
-                <dt className="text-muted">Net proceeds</dt>
-                <dd className="text-right tabular-nums">{formatCurrency(r.netProceedsCents)}</dd>
-                <dt className="text-muted">Net profit</dt>
-                <dd className="text-right tabular-nums font-semibold">{formatCurrency(r.netProfitCents)}</dd>
-                <dt className="text-muted">Margin</dt>
-                <dd className="text-right tabular-nums">{formatPercent(r.profitMarginPercent)}</dd>
-                <dt className="text-muted">ROI</dt>
-                <dd className="text-right tabular-nums">{formatPercent(r.roiPercent)}</dd>
+              <dl className="mt-4 space-y-1.5 text-sm">
+                <Row label="Total fees" value={formatCurrency(r.totalFeesCents)} />
+                <Row label="Net proceeds" value={formatCurrency(r.netProceedsCents)} />
+                <Row label="Margin" value={formatPercent(r.profitMarginPercent)} />
+                <Row label="ROI" value={formatPercent(r.roiPercent)} />
               </dl>
               {!r.isComplete && r.incompleteReason && (
-                <p className="mt-2 text-xs text-warning">{r.incompleteReason}</p>
+                <p className="mt-3 rounded-lg bg-amber-50 px-3 py-2 text-xs text-warning">
+                  {r.incompleteReason}
+                </p>
               )}
             </article>
           );
         })}
       </div>
     </section>
+  );
+}
+
+function Row({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="flex items-center justify-between gap-3">
+      <dt className="text-muted">{label}</dt>
+      <dd className="font-medium tabular-nums">{value}</dd>
+    </div>
   );
 }
