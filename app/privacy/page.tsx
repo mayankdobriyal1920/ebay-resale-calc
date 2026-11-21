@@ -48,7 +48,11 @@ export default function PrivacyPolicyPage() {
         <section>
           <h2 className="text-xl font-bold text-green-900">Contact</h2>
           <p>
-            Questions about this privacy policy can be sent via the Contact page.
+            Questions about this privacy policy can be sent to{" "}
+            <a href="mailto:hello@flipfee.online" className="text-green-700 underline">
+              hello@flipfee.online
+            </a>
+            or via the Contact page.
           </p>
         </section>
       </div>

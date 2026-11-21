@@ -21,6 +21,7 @@ const DEFAULTS = {
   packaging: "0",
   other: "0",
   promoted: "0",
+  salesTax: "0",
 };
 
 function readStored(): typeof DEFAULTS {
@@ -50,6 +51,7 @@ export default function CalculatorInputs({ onChange, initial }: CalculatorInputs
         packaging: (initial.packagingCost / 100).toFixed(2),
         other: (initial.otherCost / 100).toFixed(2),
         promoted: (initial.promotedRateBps / 100).toFixed(2),
+        salesTax: (initial.salesTaxIncluded / 100).toFixed(2),
       });
       setSeeded(true);
       setHydrated(true);
@@ -86,6 +88,7 @@ export default function CalculatorInputs({ onChange, initial }: CalculatorInputs
     const packagingCents = parseNonNegativeCents(values.packaging);
     const otherCents = parseNonNegativeCents(values.other);
     const promotedBps = parseBps(values.promoted);
+    const salesTaxCents = parseNonNegativeCents(values.salesTax);
 
     if (
       itemCostCents === null ||
@@ -94,7 +97,8 @@ export default function CalculatorInputs({ onChange, initial }: CalculatorInputs
       sellerShippingCents === null ||
       packagingCents === null ||
       otherCents === null ||
-      promotedBps === null
+      promotedBps === null ||
+      salesTaxCents === null
     ) {
       onChange(null);
       return;
@@ -109,7 +113,7 @@ export default function CalculatorInputs({ onChange, initial }: CalculatorInputs
       packagingCost: packagingCents,
       otherCost: otherCents,
       promotedRateBps: promotedBps,
-      salesTaxIncluded: 0,
+      salesTaxIncluded: salesTaxCents,
     });
   }, [values, onChange, quantity]);
 
@@ -170,6 +174,7 @@ export default function CalculatorInputs({ onChange, initial }: CalculatorInputs
         <CurrencyInput label="Your shipping / label cost" value={values.sellerShipping} onChange={(v) => setField("sellerShipping", v)} hint="Your actual label cost." />
         <CurrencyInput label="Packaging cost" value={values.packaging} onChange={(v) => setField("packaging", v)} />
         <CurrencyInput label="Other per-order cost" value={values.other} onChange={(v) => setField("other", v)} />
+        <CurrencyInput label="Sales tax included in fee base" value={values.salesTax} onChange={(v) => setField("salesTax", v)} hint="Sales tax collected from buyer (eBay fee base includes tax)." />
       </div>
       <div className="mt-4">
         <label className="block">

@@ -35,6 +35,8 @@ export default function SiteFooter() {
         </div>
         <div className="mt-6 border-t border-border pt-4 text-xs text-muted">
           © {new Date().getFullYear()} Reseller Profit Calculator. All rights reserved.
+          <br />
+          Contact: <a href="mailto:hello@flipfee.online" className="text-green-700 underline">hello@flipfee.online</a>
         </div>
       </div>
     </footer>

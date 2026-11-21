@@ -16,6 +16,12 @@ export default function AboutPage() {
         <p>
           Independent tool. Not affiliated with or endorsed by any marketplace.
         </p>
+        <p>
+          Contact us at{" "}
+          <a href="mailto:hello@flipfee.online" className="text-green-700 underline">
+            hello@flipfee.online
+          </a>
+        </p>
       </div>
     </div>
   );

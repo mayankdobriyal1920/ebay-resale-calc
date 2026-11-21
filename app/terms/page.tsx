@@ -20,6 +20,12 @@ export default function TermsPage() {
         <p>
           By using this site you agree not to misuse it and to comply with applicable laws.
         </p>
+        <p>
+          Contact us at{" "}
+          <a href="mailto:hello@flipfee.online" className="text-green-700 underline">
+            hello@flipfee.online
+          </a>
+        </p>
       </div>
     </div>
   );
