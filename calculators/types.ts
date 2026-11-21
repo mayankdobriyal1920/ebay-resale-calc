@@ -6,6 +6,7 @@ export type Cents = number; // integer cents
 export interface MoneyInput {
   itemCost: Cents;
   sellingPrice: Cents;
+  quantity: number; // items sold (default 1)
   buyerShipping: Cents;
   sellerShippingCost: Cents;
   packagingCost: Cents;

@@ -36,7 +36,11 @@ export const poshmarkAdapter: MarketplaceAdapter = {
     "Payment processing (included in commission)",
   ],
   calculate(input: MoneyInput) {
-    const saleCents = input.sellingPrice;
+    const qty = input.quantity > 0 ? input.quantity : 1;
+    const saleCents = input.sellingPrice * qty;
+    const itemCostTotalCents = input.itemCost * qty;
+    const packagingTotalCents = input.packagingCost * qty;
+    const otherTotalCents = input.otherCost * qty;
     const isHigh = saleCents >= THRESHOLD_CENTS;
     const commissionCents = isHigh
       ? applyRateBps(saleCents, HIGH_RATE_BPS)
@@ -49,7 +53,7 @@ export const poshmarkAdapter: MarketplaceAdapter = {
         baseCents: saleCents,
         amountCents: commissionCents,
         included: true,
-        note: isHigh ? "Sales of $15 or more" : "Sales under $15",
+        note: `${isHigh ? "Sales of $15 or more" : "Sales under $15"}. Quantity ${qty}.`,
       },
       {
         name: "Seller-funded shipping discount",
@@ -66,16 +70,17 @@ export const poshmarkAdapter: MarketplaceAdapter = {
       marketplaceName: "Poshmark",
       feeLines,
       modeledRevenueCents: saleCents,
-      itemCostCents: input.itemCost,
+      itemCostCents: itemCostTotalCents,
       sellerShippingCostCents: input.sellerShippingCost,
-      packagingCostCents: input.packagingCost,
-      otherCostCents: input.otherCost,
+      packagingCostCents: packagingTotalCents,
+      otherCostCents: otherTotalCents,
       sourceUrl: SOURCE_URL,
       lastVerifiedDate: "2026-11-21",
       assumptions: [
         "US seller.",
         "Commission on sale price only; buyer-paid shipping goes to Poshmark for the label.",
         "Threshold inclusive at $15.00.",
+        `Quantity ${qty}.`,
       ],
       isComplete: true,
     });

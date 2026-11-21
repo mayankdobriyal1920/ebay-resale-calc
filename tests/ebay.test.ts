@@ -6,6 +6,7 @@ function input(overrides: Partial<Parameters<typeof ebayAdapter.calculate>[0]> =
   return {
     itemCost: dollarsToCents("5.00"),
     sellingPrice: dollarsToCents("25.00"),
+    quantity: 1,
     buyerShipping: 0,
     sellerShippingCost: dollarsToCents("3.00"),
     packagingCost: 0,

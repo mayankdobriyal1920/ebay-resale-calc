@@ -6,6 +6,7 @@ function input(price: string) {
   return {
     itemCost: dollarsToCents("5.00"),
     sellingPrice: dollarsToCents(price),
+    quantity: 1,
     buyerShipping: 0,
     sellerShippingCost: 0,
     packagingCost: 0,

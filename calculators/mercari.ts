@@ -39,7 +39,12 @@ export const mercariAdapter: MarketplaceAdapter = {
     "Seller-paid label/shipping costs (use your actual label cost input)",
   ],
   calculate(input: MoneyInput) {
-    const feeBaseCents = input.sellingPrice + input.buyerShipping;
+    const qty = input.quantity > 0 ? input.quantity : 1;
+    const saleTotalCents = input.sellingPrice * qty;
+    const itemCostTotalCents = input.itemCost * qty;
+    const packagingTotalCents = input.packagingCost * qty;
+    const otherTotalCents = input.otherCost * qty;
+    const feeBaseCents = saleTotalCents + input.buyerShipping;
     const sellingFeeCents = applyRateBps(feeBaseCents, SELLING_RATE_BPS);
 
     const feeLines: FeeLine[] = [
@@ -49,7 +54,7 @@ export const mercariAdapter: MarketplaceAdapter = {
         baseCents: feeBaseCents,
         amountCents: sellingFeeCents,
         included: true,
-        note: "Item price + buyer-paid shipping",
+        note: `Item price + buyer-paid shipping. Quantity ${qty}.`,
       },
       {
         name: "Buyer Protection fee",
@@ -74,10 +79,10 @@ export const mercariAdapter: MarketplaceAdapter = {
       marketplaceName: "Mercari",
       feeLines,
       modeledRevenueCents: feeBaseCents,
-      itemCostCents: input.itemCost,
+      itemCostCents: itemCostTotalCents,
       sellerShippingCostCents: input.sellerShippingCost,
-      packagingCostCents: input.packagingCost,
-      otherCostCents: input.otherCost,
+      packagingCostCents: packagingTotalCents,
+      otherCostCents: otherTotalCents,
       sourceUrl: SOURCE_URL,
       lastVerifiedDate: "2026-11-21",
       assumptions: [
@@ -85,6 +90,7 @@ export const mercariAdapter: MarketplaceAdapter = {
         "Listing created/updated on/after 2025-01-06.",
         "Fee base includes item price + buyer-paid shipping.",
         "Buyer Protection fee is buyer-paid and excluded from seller fees.",
+        `Quantity ${qty}.`,
       ],
       isComplete: true,
     });

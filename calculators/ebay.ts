@@ -45,7 +45,12 @@ export const ebayAdapter: MarketplaceAdapter = {
     "Optional listing upgrades",
   ],
   calculate(input: MoneyInput) {
-    const feeBaseCents = input.sellingPrice + input.buyerShipping + input.salesTaxIncluded;
+    const qty = input.quantity > 0 ? input.quantity : 1;
+    const saleTotalCents = input.sellingPrice * qty;
+    const itemCostTotalCents = input.itemCost * qty;
+    const packagingTotalCents = input.packagingCost * qty;
+    const otherTotalCents = input.otherCost * qty;
+    const feeBaseCents = saleTotalCents + input.buyerShipping + input.salesTaxIncluded;
 
     // Tiered final value fee.
     let fvfCents = 0;
@@ -70,7 +75,7 @@ export const ebayAdapter: MarketplaceAdapter = {
         baseCents: feeBaseCents,
         amountCents: fvfCents,
         included: true,
-        note: "Most categories, non-Store, per item",
+        note: `Most categories, non-Store. Quantity ${qty}.`,
       },
       {
         name: "Per-order fee",
@@ -107,15 +112,15 @@ export const ebayAdapter: MarketplaceAdapter = {
       marketplaceName: "eBay",
       feeLines,
       modeledRevenueCents: feeBaseCents,
-      itemCostCents: input.itemCost,
+      itemCostCents: itemCostTotalCents,
       sellerShippingCostCents: input.sellerShippingCost,
-      packagingCostCents: input.packagingCost,
-      otherCostCents: input.otherCost,
+      packagingCostCents: packagingTotalCents,
+      otherCostCents: otherTotalCents,
       sourceUrl: SOURCE_URL,
       lastVerifiedDate: "2026-11-21",
       assumptions: [
         "US non-Store seller, most categories.",
-        "Single item / single order.",
+        `Quantity ${qty}.`,
         "Fee base includes item price + buyer-paid shipping + sales tax.",
         "Within free insertion-fee allowance.",
         "Meeting performance expectations (no surcharges).",

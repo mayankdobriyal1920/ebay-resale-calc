@@ -8,6 +8,7 @@ export function encodeStateToQuery(input: MoneyInput): string {
   const p = new URLSearchParams();
   p.set("ic", String(input.itemCost));
   p.set("sp", String(input.sellingPrice));
+  p.set("qt", String(input.quantity));
   p.set("bs", String(input.buyerShipping));
   p.set("ss", String(input.sellerShippingCost));
   p.set("pk", String(input.packagingCost));
@@ -24,9 +25,12 @@ export function decodeStateFromQuery(search: string): MoneyInput | null {
   const itemCost = num(ic);
   const sellingPrice = num(getParam(p, "sp"));
   if (!Number.isFinite(sellingPrice) || sellingPrice <= 0) return null;
+  const qt = num(getParam(p, "qt"), 1);
+  const quantity = Number.isFinite(qt) && qt >= 1 ? Math.round(qt) : 1;
   return {
     itemCost: Number.isFinite(itemCost) && itemCost >= 0 ? itemCost : 0,
     sellingPrice,
+    quantity,
     buyerShipping: Math.max(0, num(getParam(p, "bs"))),
     sellerShippingCost: Math.max(0, num(getParam(p, "ss"))),
     packagingCost: Math.max(0, num(getParam(p, "pk"))),

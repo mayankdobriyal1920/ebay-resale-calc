@@ -5,6 +5,7 @@ import { dollarsToCents } from "@/calculators/money";
 const input = {
   itemCost: dollarsToCents("5.00"),
   sellingPrice: dollarsToCents("25.00"),
+  quantity: 1,
   buyerShipping: dollarsToCents("5.00"),
   sellerShippingCost: dollarsToCents("3.00"),
   packagingCost: dollarsToCents("0.50"),

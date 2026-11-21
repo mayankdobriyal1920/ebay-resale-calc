@@ -140,12 +140,12 @@ Legend: `[ ]` not done, `[x]` done.
 
 ## L. Phase 2 (P2)
 
-- [ ] P2 Etsy adapter + page
-- [ ] P2 Whatnot adapter + page
-- [ ] P2 Reverse target-profit calculator (numeric solver per marketplace)
-- [ ] P2 Shareable URLs (query params, validated/clamped)
+- [x] P2 Etsy adapter + page (adapter + page, marked UNVERIFIED)
+- [x] P2 Whatnot adapter + page (adapter + page, marked UNVERIFIED)
+- [x] P2 Reverse target-profit calculator (numeric solver per marketplace + UI page)
+- [x] P2 Shareable URLs (query params, validated/clamped)
 - [x] P2 Local storage preferences
-- [ ] P2 Multiple quantities
+- [x] P2 Multiple quantities (quantity field across MoneyInput, adapters, shareState)
 
 ## M. Repository hygiene
 

@@ -6,6 +6,7 @@ function input(price: string, buyerShipping = "0", promoted = 0) {
   return {
     itemCost: dollarsToCents("5.00"),
     sellingPrice: dollarsToCents(price),
+    quantity: 1,
     buyerShipping: dollarsToCents(buyerShipping),
     sellerShippingCost: dollarsToCents("3.00"),
     packagingCost: 0,

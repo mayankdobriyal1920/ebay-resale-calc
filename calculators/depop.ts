@@ -39,13 +39,18 @@ export const depopAdapter: MarketplaceAdapter = {
     "PayPal processing fees for non-US sellers",
   ],
   calculate(input: MoneyInput) {
-    const feeBaseCents = input.sellingPrice + input.buyerShipping + input.salesTaxIncluded;
+    const qty = input.quantity > 0 ? input.quantity : 1;
+    const saleTotalCents = input.sellingPrice * qty;
+    const itemCostTotalCents = input.itemCost * qty;
+    const packagingTotalCents = input.packagingCost * qty;
+    const otherTotalCents = input.otherCost * qty;
+    const feeBaseCents = saleTotalCents + input.buyerShipping + input.salesTaxIncluded;
 
     const processingCents = applyRateBps(feeBaseCents, PROCESSING_RATE_BPS) + PROCESSING_FIXED_CENTS;
 
     const boostEnabled = input.promotedRateBps > 0;
     const boostRateBps = boostEnabled ? BOOST_RATE_BPS : 0;
-    const boostBaseCents = input.sellingPrice + input.buyerShipping; // excludes tax
+    const boostBaseCents = saleTotalCents + input.buyerShipping; // excludes tax
     const boostCents = boostEnabled ? applyRateBps(boostBaseCents, boostRateBps) : 0;
 
     const feeLines: FeeLine[] = [
@@ -63,7 +68,7 @@ export const depopAdapter: MarketplaceAdapter = {
         baseCents: feeBaseCents,
         amountCents: processingCents,
         included: true,
-        note: "Depop Payments (Stripe). On item price + shipping + tax.",
+        note: `Depop Payments (Stripe). On item price + shipping + tax. Quantity ${qty}.`,
       },
     ];
 
@@ -83,10 +88,10 @@ export const depopAdapter: MarketplaceAdapter = {
       marketplaceName: "Depop",
       feeLines,
       modeledRevenueCents: feeBaseCents,
-      itemCostCents: input.itemCost,
+      itemCostCents: itemCostTotalCents,
       sellerShippingCostCents: input.sellerShippingCost,
-      packagingCostCents: input.packagingCost,
-      otherCostCents: input.otherCost,
+      packagingCostCents: packagingTotalCents,
+      otherCostCents: otherTotalCents,
       sourceUrl: SOURCE_URL,
       lastVerifiedDate: "2026-11-21",
       assumptions: [
@@ -94,6 +99,7 @@ export const depopAdapter: MarketplaceAdapter = {
         "No Depop selling fee for US sellers.",
         "Processing fee base includes item price + buyer-paid shipping + tax.",
         "Boost fee base includes item price + buyer-paid shipping (excludes tax).",
+        `Quantity ${qty}.`,
       ],
       isComplete: true,
     });

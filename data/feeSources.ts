@@ -46,7 +46,7 @@ export const FEE_SOURCES: FeeSource[] = [
     url: "https://www.etsy.com/legal/fees/",
     country: "US",
     lastVerifiedDate: "TBD",
-    notes: "Phase 2.",
+    notes: "Phase 2. Typical US: listing $0.20, transaction 6.5%, processing 3%+$0.25 — verification pending.",
   },
   {
     marketplaceId: "whatnot",
@@ -54,6 +54,6 @@ export const FEE_SOURCES: FeeSource[] = [
     url: "https://help.whatnot.com/",
     country: "US",
     lastVerifiedDate: "TBD",
-    notes: "Phase 2.",
+    notes: "Phase 2. Commission varies by category — verification pending.",
   },
 ];

@@ -13,6 +13,7 @@ export default function ReverseProfitCalculatorPage() {
   const [packaging, setPackaging] = useState("0");
   const [other, setOther] = useState("0");
   const [buyerShipping, setBuyerShipping] = useState("0");
+  const [quantity, setQuantity] = useState("1");
   const [promoted, setPromoted] = useState("0");
 
   const result = solveReverseProfit({
@@ -22,8 +23,10 @@ export default function ReverseProfitCalculatorPage() {
     packagingCostCents: dollarsToCents(packaging || "0"),
     otherCostCents: dollarsToCents(other || "0"),
     marketplaceId: "ebay",
+    quantity: Number.parseInt(quantity || "1", 10) || 1,
     promotedRateBps: Math.round(Number(promoted || "0") * 100),
     buyerShippingCents: dollarsToCents(buyerShipping || "0"),
+    salesTaxIncludedCents: 0,
   });
 
   const field = (label: string, value: string, setter: (v: string) => void) => (
@@ -49,8 +52,10 @@ export default function ReverseProfitCalculatorPage() {
         <h1 className="text-3xl font-extrabold tracking-tight text-green-900">Reverse profit calculator</h1>
         <p className="mt-3 max-w-2xl text-base text-muted">
           Find the minimum selling price needed to reach a target profit (eBay, most categories).
+          Phase 2 — solves the actual fee equation per marketplace.
         </p>
       </section>
+      <DisclaimerPlaceholder />
       <section className="glass-card p-5 sm:p-6">
         <div className="grid gap-4 sm:grid-cols-2">
           {field("Desired net profit", desired, setDesired)}
@@ -59,17 +64,27 @@ export default function ReverseProfitCalculatorPage() {
           {field("Packaging cost", packaging, setPackaging)}
           {field("Other per-order cost", other, setOther)}
           {field("Buyer-paid shipping", buyerShipping, setBuyerShipping)}
+          <label className="block">
+            <span className="mb-1.5 block text-sm font-medium text-text">Quantity</span>
+            <input
+              type="text"
+              inputMode="numeric"
+              value={quantity}
+              onChange={(e) => setQuantity(e.target.value)}
+              className="input-field"
+            />
+          </label>
+          <label className="block">
+            <span className="mb-1.5 block text-sm font-medium text-text">Promoted rate (%)</span>
+            <input
+              type="text"
+              inputMode="decimal"
+              value={promoted}
+              onChange={(e) => setPromoted(e.target.value)}
+              className="input-field"
+            />
+          </label>
         </div>
-        <label className="mt-4 block">
-          <span className="mb-1.5 block text-sm font-medium text-text">Promoted rate (%)</span>
-          <input
-            type="text"
-            inputMode="decimal"
-            value={promoted}
-            onChange={(e) => setPromoted(e.target.value)}
-            className="input-field"
-          />
-        </label>
       </section>
 
       <section className="glass-card p-5 sm:p-6">
@@ -90,4 +105,17 @@ export default function ReverseProfitCalculatorPage() {
   );
 }
 
-void formatUsd;
+function DisclaimerPlaceholder() {
+  return (
+    <aside className="glass-card flex items-start gap-3 border-amber-200/60 bg-amber-50/60 p-4 text-sm text-amber-900">
+      <span aria-hidden className="text-lg">⚠️</span>
+      <p>
+        <strong>Estimates only.</strong> Marketplace fees change. Results depend on category,
+        seller plan, location, shipping method, taxes and promotions. Official marketplace
+        policies take precedence. Not financial, tax or legal advice.
+      </p>
+    </aside>
+  );
+}
+
+void dollarsToCents; void formatUsd;

@@ -1,4 +1,3 @@
-import { dollarsToCents } from "./money";
 import { ebayAdapter } from "./ebay";
 import { MarketplaceAdapter } from "./types";
 
@@ -9,6 +8,7 @@ export interface ReverseProfitInput {
   packagingCostCents: number;
   otherCostCents: number;
   marketplaceId: string;
+  quantity?: number;
   promotedRateBps: number;
   buyerShippingCents: number;
   salesTaxIncludedCents?: number;
@@ -44,6 +44,7 @@ export function solveReverseProfit(input: ReverseProfitInput): ReverseProfitResu
     const r = adapter.calculate({
       itemCost: input.itemCostCents,
       sellingPrice: priceCents,
+      quantity: input.quantity ?? 1,
       buyerShipping: input.buyerShippingCents,
       sellerShippingCost: input.sellerShippingCostCents,
       packagingCost: input.packagingCostCents,
@@ -86,6 +87,7 @@ export function solveReverseProfit(input: ReverseProfitInput): ReverseProfitResu
   const final = adapter.calculate({
     itemCost: input.itemCostCents,
     sellingPrice: lo,
+    quantity: input.quantity ?? 1,
     buyerShipping: input.buyerShippingCents,
     sellerShippingCost: input.sellerShippingCostCents,
     packagingCost: input.packagingCostCents,
@@ -103,4 +105,3 @@ export function solveReverseProfit(input: ReverseProfitInput): ReverseProfitResu
   };
 }
 
-void dollarsToCents;

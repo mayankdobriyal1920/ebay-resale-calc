@@ -15,6 +15,7 @@ const STORAGE_KEY = "ebay-cal:inputs";
 const DEFAULTS = {
   itemCost: "0",
   sellingPrice: "25.00",
+  quantity: "1",
   buyerShipping: "0",
   sellerShipping: "0",
   packaging: "0",
@@ -43,6 +44,7 @@ export default function CalculatorInputs({ onChange, initial }: CalculatorInputs
       setValues({
         itemCost: (initial.itemCost / 100).toFixed(2),
         sellingPrice: (initial.sellingPrice / 100).toFixed(2),
+        quantity: String(initial.quantity),
         buyerShipping: (initial.buyerShipping / 100).toFixed(2),
         sellerShipping: (initial.sellerShippingCost / 100).toFixed(2),
         packaging: (initial.packagingCost / 100).toFixed(2),
@@ -73,6 +75,9 @@ export default function CalculatorInputs({ onChange, initial }: CalculatorInputs
     }
   }, [values, hydrated]);
 
+  const quantityRaw = Number.parseInt(values.quantity, 10);
+  const quantity = Number.isFinite(quantityRaw) && quantityRaw >= 1 ? quantityRaw : 1;
+
   useEffect(() => {
     const itemCostCents = parseNonNegativeCents(values.itemCost);
     const sellingPriceCents = parsePositiveCents(values.sellingPrice);
@@ -98,6 +103,7 @@ export default function CalculatorInputs({ onChange, initial }: CalculatorInputs
     onChange({
       itemCost: itemCostCents,
       sellingPrice: sellingPriceCents,
+      quantity,
       buyerShipping: buyerShippingCents,
       sellerShippingCost: sellerShippingCents,
       packagingCost: packagingCents,
@@ -105,7 +111,7 @@ export default function CalculatorInputs({ onChange, initial }: CalculatorInputs
       promotedRateBps: promotedBps,
       salesTaxIncluded: 0,
     });
-  }, [values, onChange]);
+  }, [values, onChange, quantity]);
 
   const itemCostError =
     values.itemCost.trim() !== "" && parseNonNegativeCents(values.itemCost) === null
@@ -143,6 +149,7 @@ export default function CalculatorInputs({ onChange, initial }: CalculatorInputs
       <div className="grid gap-4 sm:grid-cols-2">
         <CurrencyInput label="Item purchase cost" value={values.itemCost} onChange={(v) => setField("itemCost", v)} hint="What you paid for the item." error={itemCostError} />
         <CurrencyInput label="Expected selling price" value={values.sellingPrice} onChange={(v) => setField("sellingPrice", v)} required hint="Listed sale price." error={sellingPriceError} />
+        <CurrencyInput label="Quantity" value={values.quantity} onChange={(v) => setField("quantity", v)} hint="Number of identical items sold." />
         <CurrencyInput label="Buyer-paid shipping" value={values.buyerShipping} onChange={(v) => setField("buyerShipping", v)} hint="Shipping the buyer pays." />
         <CurrencyInput label="Your shipping / label cost" value={values.sellerShipping} onChange={(v) => setField("sellerShipping", v)} hint="Your actual label cost." />
         <CurrencyInput label="Packaging cost" value={values.packaging} onChange={(v) => setField("packaging", v)} />
