@@ -5,6 +5,7 @@ import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 import CookieConsent from "@/components/CookieConsent";
 import AdSense from "@/components/AdSense";
+import GoogleTagManager from "@/components/GoogleTagManager";
 
 const inter = Inter({ subsets: ["latin"], display: "swap", variable: "--font-inter" });
 
@@ -37,6 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SiteFooter />
         <CookieConsent />
         <AdSense />
+        <GoogleTagManager />
       </body>
     </html>
   );

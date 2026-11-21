@@ -13,7 +13,7 @@ export default function PrivacyPolicyPage() {
           settings. We do not store sensitive personal data.
         </p>
         <p>
-          If analytics or advertising scripts (such as Google AdSense) are enabled, they may
+          If analytics or tag-management scripts (such as Google Tag Manager / Google AdSense) are enabled, they may
           collect technical data (device, browser, approximate location, page views, ad
           interactions) as described by those providers. Ad scripts load only after you accept
           cookies. We do not send your entered financial values to analytics or ads.
