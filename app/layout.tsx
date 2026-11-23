@@ -19,6 +19,11 @@ export const metadata: Metadata = {
   description:
     "Estimate your profit before you list. Compare fees across eBay, Poshmark, Mercari and Depop.",
   alternates: { canonical: "/" },
+  icons: [
+    { rel: "icon", url: "/favicon.ico", sizes: "48x48 96x96 32x32 16x16", type: "image/x-icon" },
+    { rel: "icon", url: "/logo.png", sizes: "256x256", type: "image/png" },
+    { rel: "apple-touch-icon", url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+  ],
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
   },
